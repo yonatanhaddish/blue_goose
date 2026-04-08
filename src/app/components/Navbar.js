@@ -6,13 +6,21 @@ import { GiGoose } from "react-icons/gi";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ACCENT = "#E8562F";
+const ACCENT = "#3B82F6";
 const BG = "#F5F3EF";
 const DARK = "#131313";
 const FD = "var(--font-syne), sans-serif";
 const FB = "var(--font-jakarta), sans-serif";
-const NAV = ["Services", "Why Us", "Our Work", "Contact"];
-const ID_MAP = { Services: "services", "Why Us": "why-us", "Our Work": "our-work", Contact: "contact" };
+const NAV = ["Home", "About Us", "Services", "Why Us", "Our Work", "Reviews", "Contact Us"];
+const ID_MAP = {
+  "Home": null,
+  "About Us": "about",
+  "Services": "services",
+  "Why Us": "why-us",
+  "Our Work": "our-work",
+  "Reviews": "reviews",
+  "Contact Us": "contact",
+};
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,7 +33,11 @@ export default function Navbar() {
   }, []);
 
   const go = (item) => {
-    document.getElementById(ID_MAP[item])?.scrollIntoView({ behavior: "smooth" });
+    if (item === "Home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      document.getElementById(ID_MAP[item])?.scrollIntoView({ behavior: "smooth" });
+    }
     setOpen(false);
   };
 
@@ -55,20 +67,20 @@ export default function Navbar() {
           sx={{ display: "flex", alignItems: "center", gap: "9px", cursor: "pointer", userSelect: "none" }}
         >
           <GiGoose size={30} color={ACCENT} />
-          <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "17px", color: DARK, letterSpacing: "-0.4px" }}>
+          <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "20px", color: DARK, letterSpacing: "-0.4px" }}>
             Blue Goose
           </Typography>
         </Box>
 
         {/* Desktop links */}
-        <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: "2px" }}>
-          {NAV.slice(0, 3).map((item) => (
+        <Box sx={{ display: "none", "@media (min-width: 1024px)": { display: "flex" }, alignItems: "center", gap: "2px" }}>
+          {NAV.slice(0, -1).map((item) => (
             <Box
               key={item}
               onClick={() => go(item)}
               sx={{
-                px: "16px", py: "8px", borderRadius: "8px",
-                fontFamily: FB, fontWeight: 500, fontSize: "14px", color: "#555",
+                px: "13px", py: "8px", borderRadius: "8px",
+                fontFamily: FB, fontWeight: 500, fontSize: "15px", color: "#555",
                 cursor: "pointer", transition: "all 0.2s",
                 "&:hover": { color: DARK, backgroundColor: "rgba(0,0,0,0.05)" },
               }}
@@ -78,24 +90,24 @@ export default function Navbar() {
           ))}
           {/* CTA pill */}
           <Box
-            onClick={() => go("Contact")}
+            onClick={() => go("Contact Us")}
             sx={{
-              ml: "12px", px: "22px", py: "9px",
+              ml: "10px", px: "20px", py: "9px",
               backgroundColor: DARK, color: BG,
               borderRadius: "100px",
-              fontFamily: FB, fontWeight: 600, fontSize: "13px",
+              fontFamily: FB, fontWeight: 600, fontSize: "15px",
               cursor: "pointer", transition: "all 0.25s",
-              "&:hover": { backgroundColor: ACCENT, transform: "translateY(-1px)", boxShadow: "0 6px 20px rgba(232,86,47,0.35)" },
+              "&:hover": { backgroundColor: ACCENT, transform: "translateY(-1px)", boxShadow: "0 6px 20px rgba(59,130,246,0.35)" },
             }}
           >
-            Get in Touch
+            Contact Us
           </Box>
         </Box>
 
         {/* Mobile burger */}
         <IconButton
           onClick={() => setOpen(true)}
-          sx={{ display: { xs: "flex", md: "none" }, color: DARK }}
+          sx={{ display: "flex", "@media (min-width: 1024px)": { display: "none" }, color: DARK }}
         >
           <MenuIcon />
         </IconButton>
@@ -112,7 +124,7 @@ export default function Navbar() {
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: "40px" }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <GiGoose size={26} color={ACCENT} />
-              <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "16px", color: DARK }}>Blue Goose</Typography>
+              <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "19px", color: DARK }}>Blue Goose</Typography>
             </Box>
             <IconButton onClick={() => setOpen(false)} size="small" sx={{ color: DARK }}>
               <CloseIcon fontSize="small" />
@@ -125,7 +137,7 @@ export default function Navbar() {
               sx={{
                 py: "16px",
                 borderBottom: "1px solid rgba(0,0,0,0.06)",
-                fontFamily: FB, fontWeight: 600, fontSize: "16px", color: DARK,
+                fontFamily: FB, fontWeight: 600, fontSize: "18px", color: DARK,
                 cursor: "pointer", transition: "color 0.2s",
                 "&:hover": { color: ACCENT },
               }}
@@ -134,17 +146,17 @@ export default function Navbar() {
             </Box>
           ))}
           <Box
-            onClick={() => go("Contact")}
+            onClick={() => go("Contact Us")}
             sx={{
               mt: "28px", py: "14px",
               backgroundColor: DARK, color: BG,
               borderRadius: "12px", textAlign: "center",
-              fontFamily: FB, fontWeight: 600, fontSize: "15px",
+              fontFamily: FB, fontWeight: 600, fontSize: "17px",
               cursor: "pointer", transition: "background 0.2s",
               "&:hover": { backgroundColor: ACCENT },
             }}
           >
-            Get in Touch
+            Contact Us
           </Box>
         </Box>
       </Drawer>

@@ -11,6 +11,13 @@ import {
   FaTrophy,
 } from "react-icons/fa";
 
+const ACCENT = "#3B82F6";
+const DARK = "#131313";
+const CARD_BG = "#181818";
+const TEXT = "#F5F3EF";
+const FD = "var(--font-syne), sans-serif";
+const FB = "var(--font-jakarta), sans-serif";
+
 const whyUsData = [
   {
     icon: <FaRocket size={18} />,
@@ -67,22 +74,36 @@ function WhyUs() {
     <Box
       id="why-us"
       sx={{
-        px: { xs: "24px", md: "60px", lg: "80px", xl: "120px" },
+        px: { xs: "24px", md: "48px", lg: "72px" },
         py: { xs: "80px", md: "120px" },
-        backgroundColor: "#001e3c",
+        backgroundColor: "#0E0E0E",
         width: "100%",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Ambient glow */}
+      <Box sx={{
+        position: "absolute",
+        top: "30%", right: "-100px",
+        width: "500px", height: "500px",
+        borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 65%)",
+        pointerEvents: "none",
+        animation: "orb-drift 12s ease-in-out infinite",
+      }} />
+
       {/* Header */}
-      <Box sx={{ mb: "72px" }}>
+      <Box sx={{ mb: "72px", position: "relative", zIndex: 1 }}>
         <Typography
           sx={{
-            fontSize: "12px",
-            fontWeight: "700",
+            fontFamily: FB,
+            fontSize: "13px",
+            fontWeight: 700,
             letterSpacing: "2px",
-            color: "#64b5f6",
+            color: ACCENT,
             textTransform: "uppercase",
-            mb: "12px",
+            mb: "14px",
           }}
         >
           Why Blue Goose
@@ -98,28 +119,29 @@ function WhyUs() {
         >
           <Typography
             sx={{
-              fontWeight: "800",
-              fontSize: { xs: "30px", md: "44px" },
-              color: "#ffffff",
-              lineHeight: 1.15,
-              letterSpacing: "-1px",
+              fontFamily: FD,
+              fontWeight: 800,
+              fontSize: { xs: "38px", md: "56px" },
+              color: TEXT,
+              lineHeight: 1.08,
+              letterSpacing: "-1.5px",
               maxWidth: "480px",
             }}
           >
-            We don't just build — we{" "}
-            <span style={{ color: "#64b5f6" }}>partner.</span>
+            We don't just build —{" "}
+            <Box component="span" sx={{ color: ACCENT }}>we partner.</Box>
           </Typography>
           <Typography
             sx={{
-              fontSize: "16px",
-              color: "#8899aa",
-              lineHeight: 1.7,
-              maxWidth: "340px",
+              fontFamily: FB,
+              fontSize: "17px",
+              color: "#555",
+              lineHeight: 1.75,
+              maxWidth: "320px",
               textAlign: { xs: "left", md: "right" },
             }}
           >
-            Here's what sets us apart from every other agency promising the
-            world.
+            Here's what sets us apart from every other agency promising the world.
           </Typography>
         </Box>
       </Box>
@@ -134,10 +156,12 @@ function WhyUs() {
             lg: "repeat(3, 1fr)",
           },
           gap: "1px",
-          backgroundColor: "rgba(255,255,255,0.07)",
+          backgroundColor: "rgba(255,255,255,0.06)",
           borderRadius: "20px",
           overflow: "hidden",
-          border: "1px solid rgba(255,255,255,0.07)",
+          border: "1px solid rgba(255,255,255,0.06)",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         {whyUsData.map((item, index) => (
@@ -145,22 +169,50 @@ function WhyUs() {
             key={index}
             sx={{
               p: { xs: "32px", md: "40px" },
-              backgroundColor: "#001e3c",
+              backgroundColor: CARD_BG,
               transition: "all 0.25s ease",
               cursor: "default",
+              position: "relative",
+              overflow: "hidden",
               "&:hover": {
-                backgroundColor: "#002a52",
+                backgroundColor: "#202020",
                 "& .why-icon": {
-                  backgroundColor: "#64b5f6",
-                  color: "#001e3c",
+                  backgroundColor: ACCENT,
+                  color: "#fff",
+                  transform: "scale(1.08)",
                 },
                 "& .why-stat": {
-                  color: "#64b5f6",
+                  color: ACCENT,
+                },
+                "& .why-ghost": {
+                  opacity: 1,
                 },
               },
             }}
           >
-            {/* Icon + Number Row */}
+            {/* Ghost number watermark */}
+            <Typography
+              className="why-ghost"
+              sx={{
+                position: "absolute",
+                bottom: "-12px",
+                right: "20px",
+                fontFamily: FD,
+                fontWeight: 800,
+                fontSize: "90px",
+                color: "rgba(255,255,255,0.025)",
+                lineHeight: 1,
+                letterSpacing: "-4px",
+                pointerEvents: "none",
+                userSelect: "none",
+                transition: "opacity 0.3s ease",
+                opacity: 0,
+              }}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </Typography>
+
+            {/* Icon + Stat Row */}
             <Box
               sx={{
                 display: "flex",
@@ -175,12 +227,13 @@ function WhyUs() {
                   width: "44px",
                   height: "44px",
                   borderRadius: "10px",
-                  backgroundColor: "rgba(100,181,246,0.12)",
-                  color: "#64b5f6",
+                  backgroundColor: "rgba(59,130,246,0.1)",
+                  color: ACCENT,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   transition: "all 0.25s ease",
+                  flexShrink: 0,
                 }}
               >
                 {item.icon}
@@ -189,9 +242,10 @@ function WhyUs() {
                 <Typography
                   className="why-stat"
                   sx={{
-                    fontWeight: "800",
-                    fontSize: "24px",
-                    color: "#ffffff",
+                    fontFamily: FD,
+                    fontWeight: 800,
+                    fontSize: "28px",
+                    color: TEXT,
                     lineHeight: 1,
                     letterSpacing: "-0.5px",
                     transition: "color 0.25s ease",
@@ -201,9 +255,10 @@ function WhyUs() {
                 </Typography>
                 <Typography
                   sx={{
-                    fontSize: "11px",
-                    color: "#556677",
-                    fontWeight: "600",
+                    fontFamily: FB,
+                    fontSize: "13px",
+                    color: "#444",
+                    fontWeight: 600,
                     mt: "2px",
                   }}
                 >
@@ -214,9 +269,10 @@ function WhyUs() {
 
             <Typography
               sx={{
-                fontWeight: "700",
-                fontSize: "17px",
-                color: "#ffffff",
+                fontFamily: FD,
+                fontWeight: 700,
+                fontSize: "19px",
+                color: TEXT,
                 mb: "10px",
                 letterSpacing: "-0.2px",
               }}
@@ -226,9 +282,10 @@ function WhyUs() {
 
             <Typography
               sx={{
-                color: "#8899aa",
+                fontFamily: FB,
+                color: "#666",
                 lineHeight: 1.65,
-                fontSize: "14px",
+                fontSize: "16px",
               }}
             >
               {item.description}

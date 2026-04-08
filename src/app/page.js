@@ -1,7 +1,6 @@
-import Image from "next/image";
-import { Box, Typography } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Landingpage from "./components/LandingPage";
+import AboutUs from "./components/AboutUs";
 import Services from "./components/Services";
 import WhyUs from "./components/WhyUs";
 import OurWork from "./components/OurWork";
@@ -13,6 +12,7 @@ export default function Home() {
     <>
       <Navbar />
       <Landingpage />
+      <AboutUs />
       <Services />
       <WhyUs />
       <OurWork />

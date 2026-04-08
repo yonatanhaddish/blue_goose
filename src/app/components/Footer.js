@@ -5,7 +5,7 @@ import { Box, Typography, IconButton } from "@mui/material";
 import { GiGoose } from "react-icons/gi";
 import { FaLinkedinIn, FaTwitter, FaGithub, FaInstagram } from "react-icons/fa";
 
-const ACCENT = "#E8562F";
+const ACCENT = "#3B82F6";
 const DARK = "#131313";
 const TEXT = "#F5F3EF";
 const FD = "var(--font-syne), sans-serif";
@@ -47,11 +47,11 @@ export default function Footer() {
         <Box sx={{ gridColumn: { xs: "1 / -1", md: "auto" } }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: "9px", mb: "16px" }}>
             <GiGoose size={28} color={ACCENT} />
-            <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "17px", color: TEXT, letterSpacing: "-0.4px" }}>
+            <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "20px", color: TEXT, letterSpacing: "-0.4px" }}>
               Blue Goose
             </Typography>
           </Box>
-          <Typography sx={{ fontFamily: FB, fontSize: "14px", color: "#555", lineHeight: 1.75, maxWidth: "240px", mb: "24px" }}>
+          <Typography sx={{ fontFamily: FB, fontSize: "16px", color: "#555", lineHeight: 1.75, maxWidth: "260px", mb: "24px" }}>
             Premium digital solutions for businesses that want to stand out and scale.
           </Typography>
           <Box sx={{ display: "flex", gap: "7px" }}>
@@ -75,7 +75,7 @@ export default function Footer() {
 
         {/* Company */}
         <Box>
-          <Typography sx={{ fontFamily: FB, fontSize: "11px", fontWeight: 700, color: "#444", letterSpacing: "1.5px", textTransform: "uppercase", mb: "20px" }}>
+          <Typography sx={{ fontFamily: FB, fontSize: "13px", fontWeight: 700, color: "#444", letterSpacing: "1.5px", textTransform: "uppercase", mb: "20px" }}>
             Company
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -84,7 +84,7 @@ export default function Footer() {
                 key={link}
                 onClick={() => go(link)}
                 sx={{
-                  fontFamily: FB, fontSize: "14px", color: "#555",
+                  fontFamily: FB, fontSize: "16px", color: "#555",
                   cursor: "pointer", width: "fit-content", transition: "color 0.2s",
                   "&:hover": { color: TEXT },
                 }}
@@ -97,7 +97,7 @@ export default function Footer() {
 
         {/* Services */}
         <Box>
-          <Typography sx={{ fontFamily: FB, fontSize: "11px", fontWeight: 700, color: "#444", letterSpacing: "1.5px", textTransform: "uppercase", mb: "20px" }}>
+          <Typography sx={{ fontFamily: FB, fontSize: "13px", fontWeight: 700, color: "#444", letterSpacing: "1.5px", textTransform: "uppercase", mb: "20px" }}>
             Services
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -105,7 +105,7 @@ export default function Footer() {
               <Typography
                 key={s}
                 sx={{
-                  fontFamily: FB, fontSize: "14px", color: "#555",
+                  fontFamily: FB, fontSize: "16px", color: "#555",
                   cursor: "default", width: "fit-content", transition: "color 0.2s",
                   "&:hover": { color: TEXT },
                 }}
@@ -118,12 +118,12 @@ export default function Footer() {
 
         {/* Contact */}
         <Box>
-          <Typography sx={{ fontFamily: FB, fontSize: "11px", fontWeight: 700, color: "#444", letterSpacing: "1.5px", textTransform: "uppercase", mb: "20px" }}>
+          <Typography sx={{ fontFamily: FB, fontSize: "13px", fontWeight: 700, color: "#444", letterSpacing: "1.5px", textTransform: "uppercase", mb: "20px" }}>
             Contact
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {["hello@bluegoosedigital.com", "+1 (555) 123-4567", "Toronto, ON, Canada"].map((v) => (
-              <Typography key={v} sx={{ fontFamily: FB, fontSize: "14px", color: "#555", lineHeight: 1.5 }}>
+              <Typography key={v} sx={{ fontFamily: FB, fontSize: "16px", color: "#555", lineHeight: 1.5 }}>
                 {v}
               </Typography>
             ))}
@@ -143,10 +143,10 @@ export default function Footer() {
           textAlign: { xs: "center", sm: "left" },
         }}
       >
-        <Typography sx={{ fontFamily: FB, fontSize: "13px", color: "#3A3A3A" }}>
+        <Typography sx={{ fontFamily: FB, fontSize: "15px", color: "#3A3A3A" }}>
           © {year} Blue Goose Digital. All rights reserved.
         </Typography>
-        <Typography sx={{ fontFamily: FB, fontSize: "13px", color: "#3A3A3A" }}>
+        <Typography sx={{ fontFamily: FB, fontSize: "15px", color: "#3A3A3A" }}>
           Designed & built in Toronto 🇨🇦
         </Typography>
       </Box>
