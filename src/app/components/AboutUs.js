@@ -6,6 +6,7 @@ import { GiGoose } from "react-icons/gi";
 import { FaMapMarkerAlt, FaCalendarAlt, FaUsers, FaLaptopCode, FaCheckCircle } from "react-icons/fa";
 
 const ACCENT = "#3B82F6";
+const ORANGE = "#F97316";
 const DARK = "#131313";
 const BG = "#F5F3EF";
 const FD = "var(--font-syne), sans-serif";
@@ -35,10 +36,10 @@ const PILLARS = [
 ];
 
 const STATS = [
-  { value: "80+", label: "Projects Delivered" },
-  { value: "100%", label: "Client Satisfaction" },
-  { value: "<1hr", label: "Avg. Response Time" },
-  { value: "2024", label: "Est. Toronto, ON" },
+  { value: "80+", label: "Projects Delivered", color: ACCENT },
+  { value: "100%", label: "Client Satisfaction", color: ACCENT },
+  { value: "<1hr", label: "Avg. Response Time", color: ORANGE },
+  { value: "2024", label: "Est. Toronto, ON", color: ORANGE },
 ];
 
 export default function AboutUs() {
@@ -217,7 +218,7 @@ export default function AboutUs() {
                 lineHeight: 1.2, mb: "14px",
               }}>
                 Not just another agency.{" "}
-                <Box component="span" sx={{ color: ACCENT }}>A growth partner.</Box>
+                <Box component="span" sx={{ color: ORANGE }}>A growth partner.</Box>
               </Typography>
               <Typography sx={{
                 fontFamily: FB,
@@ -380,7 +381,7 @@ export default function AboutUs() {
               <Typography sx={{
                 fontFamily: FD, fontWeight: 800,
                 fontSize: { xs: "36px", md: "44px" },
-                color: ACCENT, lineHeight: 1,
+                color: s.color, lineHeight: 1,
                 letterSpacing: "-1.5px", mb: "8px",
               }}>
                 {s.value}

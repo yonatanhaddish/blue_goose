@@ -5,6 +5,7 @@ import { Box, Typography } from "@mui/material";
 import { FaCode, FaPaintBrush, FaChartLine, FaCogs, FaRobot, FaVideo } from "react-icons/fa";
 
 const ACCENT = "#3B82F6";
+const ORANGE = "#F97316";
 const DARK = "#131313";
 const CARD_BG = "#181818";
 const TEXT = "#F5F3EF";
@@ -105,7 +106,7 @@ export default function Services() {
             color: TEXT, letterSpacing: "-2px", lineHeight: 1.06,
           }}>
             Services built for<br />
-            <Box component="span" sx={{ color: ACCENT }}>modern businesses.</Box>
+            <Box component="span" sx={{ color: ORANGE }}>modern businesses.</Box>
           </Typography>
 
           <Typography sx={{

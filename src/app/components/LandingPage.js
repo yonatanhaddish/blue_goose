@@ -5,6 +5,7 @@ import { Box, Typography } from "@mui/material";
 import { FaArrowRight, FaPlay } from "react-icons/fa";
 
 const ACCENT = "#3B82F6";
+const ORANGE = "#F97316";
 const BG = "#F5F3EF";
 const DARK = "#131313";
 const FD = "var(--font-syne), sans-serif";
@@ -16,9 +17,9 @@ const TICKER = [
 ];
 
 const STATS = [
-  { value: "80+", label: "Projects Delivered" },
-  { value: "100%", label: "Satisfaction" },
-  { value: "<1hr", label: "Response Time" },
+  { value: "80+", label: "Projects Delivered", color: ACCENT },
+  { value: "100%", label: "Satisfaction", color: ACCENT },
+  { value: "<1hr", label: "Response Time", color: ORANGE },
 ];
 
 export default function Landingpage() {
@@ -100,7 +101,7 @@ export default function Landingpage() {
         }}>
           Websites That Work.{" "}
           <Box component="span" sx={{
-            color: ACCENT,
+            color: ORANGE,
             position: "relative",
             display: "inline-block",
             "&::after": {
@@ -108,7 +109,7 @@ export default function Landingpage() {
               position: "absolute",
               bottom: { xs: "-2px", md: "-6px" },
               left: 0, width: "100%", height: { xs: "3px", md: "5px" },
-              background: `linear-gradient(90deg, ${ACCENT}, rgba(59,130,246,0.2))`,
+              background: `linear-gradient(90deg, ${ORANGE}, rgba(249,115,22,0.2))`,
               borderRadius: "4px",
             },
           }}>
@@ -205,7 +206,7 @@ export default function Landingpage() {
                 <Typography sx={{
                   fontFamily: FD, fontWeight: 800,
                   fontSize: { xs: "28px", md: "32px" },
-                  color: ACCENT, letterSpacing: "-1px", lineHeight: 1,
+                  color: s.color, letterSpacing: "-1px", lineHeight: 1,
                 }}>
                   {s.value}
                 </Typography>
@@ -250,7 +251,7 @@ export default function Landingpage() {
               </Typography>
               <Box sx={{
                 width: "5px", height: "5px", borderRadius: "50%",
-                backgroundColor: ACCENT, flexShrink: 0,
+                backgroundColor: i % 2 === 0 ? ACCENT : ORANGE, flexShrink: 0,
               }} />
             </Box>
           ))}

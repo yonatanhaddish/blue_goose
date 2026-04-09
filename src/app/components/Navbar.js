@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Box, Typography, IconButton, Drawer } from "@mui/material";
-import { GiGoose } from "react-icons/gi";
+import Image from "next/image";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -54,50 +54,88 @@ export default function Navbar() {
           alignItems: "center",
           justifyContent: "space-between",
           px: { xs: "20px", md: "48px", lg: "72px" },
-          backgroundColor: scrolled ? "rgba(245,243,239,0.9)" : BG,
-          backdropFilter: scrolled ? "blur(14px)" : "none",
+          backgroundColor: scrolled ? "rgba(245,243,239,0.92)" : BG,
+          backdropFilter: scrolled ? "blur(16px)" : "none",
           borderBottom: "1px solid",
-          borderColor: scrolled ? "rgba(0,0,0,0.07)" : "transparent",
-          transition: "all 0.35s ease",
+          borderColor: scrolled ? "rgba(0,0,0,0.08)" : "transparent",
+          transition: "background-color 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease",
         }}
       >
         {/* Logo */}
         <Box
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          sx={{ display: "flex", alignItems: "center", gap: "9px", cursor: "pointer", userSelect: "none" }}
+          sx={{
+            display: "flex", alignItems: "center", gap: "10px",
+            cursor: "pointer", userSelect: "none",
+            transition: "opacity 0.2s",
+            "&:hover": { opacity: 0.8 },
+          }}
         >
-          <GiGoose size={30} color={ACCENT} />
-          <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "20px", color: DARK, letterSpacing: "-0.4px" }}>
-            Blue Goose
+          <Box sx={{
+            width: "34px", height: "34px", borderRadius: "9px",
+            overflow: "hidden", flexShrink: 0,
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <Image src="/images/logo.png" alt="Blue Goose" width={34} height={34} style={{ objectFit: "contain" }} />
+          </Box>
+          <Typography sx={{
+            fontFamily: FD, fontWeight: 800, fontSize: "19px",
+            letterSpacing: "-0.5px",
+          }}>
+            <Box component="span" sx={{ color: ACCENT }}>Blue</Box>
+            <Box component="span" sx={{ color: "#F97316" }}> Goose</Box>
           </Typography>
         </Box>
 
         {/* Desktop links */}
-        <Box sx={{ display: "none", "@media (min-width: 1024px)": { display: "flex" }, alignItems: "center", gap: "2px" }}>
+        <Box sx={{
+          display: "none",
+          "@media (min-width: 1024px)": { display: "flex" },
+          alignItems: "center", gap: "4px",
+        }}>
           {NAV.slice(0, -1).map((item) => (
             <Box
               key={item}
               onClick={() => go(item)}
               sx={{
-                px: "13px", py: "8px", borderRadius: "8px",
-                fontFamily: FB, fontWeight: 500, fontSize: "15px", color: "#555",
-                cursor: "pointer", transition: "all 0.2s",
-                "&:hover": { color: DARK, backgroundColor: "rgba(0,0,0,0.05)" },
+                position: "relative",
+                px: "12px", py: "7px", borderRadius: "8px",
+                fontFamily: FB, fontWeight: 500, fontSize: "14.5px", color: "#666",
+                cursor: "pointer", transition: "color 0.2s",
+                "&:hover": { color: DARK },
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  bottom: "3px", left: "50%",
+                  width: 0, height: "1.5px",
+                  backgroundColor: ACCENT,
+                  transform: "translateX(-50%)",
+                  transition: "width 0.25s ease",
+                },
+                "&:hover::after": { width: "50%" },
               }}
             >
               {item}
             </Box>
           ))}
-          {/* CTA pill */}
+
+          {/* Divider */}
+          <Box sx={{ width: "1px", height: "18px", backgroundColor: "rgba(0,0,0,0.1)", mx: "8px" }} />
+
+          {/* CTA */}
           <Box
             onClick={() => go("Contact Us")}
             sx={{
-              ml: "10px", px: "20px", py: "9px",
+              px: "18px", py: "8px",
               backgroundColor: DARK, color: BG,
               borderRadius: "100px",
-              fontFamily: FB, fontWeight: 600, fontSize: "15px",
+              fontFamily: FB, fontWeight: 600, fontSize: "14.5px",
               cursor: "pointer", transition: "all 0.25s",
-              "&:hover": { backgroundColor: ACCENT, transform: "translateY(-1px)", boxShadow: "0 6px 20px rgba(59,130,246,0.35)" },
+              "&:hover": {
+                backgroundColor: ACCENT,
+                transform: "translateY(-1px)",
+                boxShadow: "0 6px 20px rgba(59,130,246,0.3)",
+              },
             }}
           >
             Contact Us
@@ -107,9 +145,18 @@ export default function Navbar() {
         {/* Mobile burger */}
         <IconButton
           onClick={() => setOpen(true)}
-          sx={{ display: "flex", "@media (min-width: 1024px)": { display: "none" }, color: DARK }}
+          size="small"
+          sx={{
+            display: "flex",
+            "@media (min-width: 1024px)": { display: "none" },
+            color: DARK,
+            width: "38px", height: "38px", borderRadius: "10px",
+            border: "1px solid rgba(0,0,0,0.09)",
+            backgroundColor: "rgba(0,0,0,0.03)",
+            "&:hover": { backgroundColor: "rgba(0,0,0,0.07)" },
+          }}
         >
-          <MenuIcon />
+          <MenuIcon fontSize="small" />
         </IconButton>
       </Box>
 
@@ -118,42 +165,73 @@ export default function Navbar() {
         anchor="right"
         open={open}
         onClose={() => setOpen(false)}
-        sx={{ "& .MuiDrawer-paper": { width: 280, backgroundColor: BG, boxShadow: "none", borderLeft: "1px solid rgba(0,0,0,0.08)" } }}
+        sx={{
+          "& .MuiDrawer-paper": {
+            width: 300,
+            backgroundColor: BG,
+            boxShadow: "-8px 0 40px rgba(0,0,0,0.08)",
+            border: "none",
+          },
+        }}
       >
-        <Box sx={{ p: "28px" }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: "40px" }}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <GiGoose size={26} color={ACCENT} />
-              <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "19px", color: DARK }}>Blue Goose</Typography>
+        <Box sx={{ display: "flex", flexDirection: "column", height: "100%", p: "24px" }}>
+
+          {/* Drawer header */}
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: "36px" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <Box sx={{ width: "30px", height: "30px", borderRadius: "8px", overflow: "hidden", flexShrink: 0 }}>
+                <Image src="/images/logo.png" alt="Blue Goose" width={30} height={30} style={{ objectFit: "contain" }} />
+              </Box>
+              <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "18px", letterSpacing: "-0.4px" }}>
+                <Box component="span" sx={{ color: ACCENT }}>Blue</Box>
+                <Box component="span" sx={{ color: "#F97316" }}> Goose</Box>
+              </Typography>
             </Box>
-            <IconButton onClick={() => setOpen(false)} size="small" sx={{ color: DARK }}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </Box>
-          {NAV.map((item) => (
-            <Box
-              key={item}
-              onClick={() => go(item)}
+            <IconButton
+              onClick={() => setOpen(false)}
+              size="small"
               sx={{
-                py: "16px",
-                borderBottom: "1px solid rgba(0,0,0,0.06)",
-                fontFamily: FB, fontWeight: 600, fontSize: "18px", color: DARK,
-                cursor: "pointer", transition: "color 0.2s",
-                "&:hover": { color: ACCENT },
+                width: "34px", height: "34px", borderRadius: "9px",
+                color: DARK, border: "1px solid rgba(0,0,0,0.09)",
+                backgroundColor: "rgba(0,0,0,0.03)",
+                "&:hover": { backgroundColor: "rgba(0,0,0,0.07)" },
               }}
             >
-              {item}
-            </Box>
-          ))}
+              <CloseIcon sx={{ fontSize: "16px" }} />
+            </IconButton>
+          </Box>
+
+          {/* Nav items */}
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "2px", flexGrow: 1 }}>
+            {NAV.slice(0, -1).map((item) => (
+              <Box
+                key={item}
+                onClick={() => go(item)}
+                sx={{
+                  px: "14px", py: "13px", borderRadius: "12px",
+                  fontFamily: FB, fontWeight: 500, fontSize: "16px", color: "#555",
+                  cursor: "pointer", transition: "all 0.18s",
+                  "&:hover": {
+                    color: DARK,
+                    backgroundColor: "rgba(0,0,0,0.05)",
+                  },
+                }}
+              >
+                {item}
+              </Box>
+            ))}
+          </Box>
+
+          {/* CTA */}
           <Box
             onClick={() => go("Contact Us")}
             sx={{
-              mt: "28px", py: "14px",
+              mt: "24px", py: "14px",
               backgroundColor: DARK, color: BG,
-              borderRadius: "12px", textAlign: "center",
-              fontFamily: FB, fontWeight: 600, fontSize: "17px",
-              cursor: "pointer", transition: "background 0.2s",
-              "&:hover": { backgroundColor: ACCENT },
+              borderRadius: "14px", textAlign: "center",
+              fontFamily: FB, fontWeight: 600, fontSize: "16px",
+              cursor: "pointer", transition: "all 0.2s",
+              "&:hover": { backgroundColor: ACCENT, boxShadow: "0 6px 24px rgba(59,130,246,0.3)" },
             }}
           >
             Contact Us
