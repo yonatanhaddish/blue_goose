@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
-import { GiGoose } from "react-icons/gi";
+import Image from "next/image";
 import {
   FaLinkedinIn,
   FaTwitter,
@@ -145,17 +145,12 @@ export default function Footer() {
                 mb: "16px",
               }}
             >
-              <GiGoose size={28} color={ACCENT} />
-              <Typography
-                sx={{
-                  fontFamily: FD,
-                  fontWeight: 800,
-                  fontSize: "20px",
-                  color: TEXT,
-                  letterSpacing: "-0.4px",
-                }}
-              >
-                Blue Goose
+              <Box sx={{ position: "relative", width: "30px", height: "30px", flexShrink: 0 }}>
+                <Image src="/images/logo.png" alt="Blue Goose" fill style={{ objectFit: "contain" }} />
+              </Box>
+              <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "20px", letterSpacing: "-0.4px" }}>
+                <Box component="span" sx={{ color: ACCENT }}>Blue</Box>
+                <Box component="span" sx={{ color: "#F97316" }}> Goose</Box>
               </Typography>
             </Box>
             <Typography

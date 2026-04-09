@@ -75,62 +75,107 @@ export default function Reviews() {
       }}
     >
       {/* Orbs */}
-      <Box sx={{
-        position: "absolute", top: "-60px", right: "-60px",
-        width: "480px", height: "480px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 65%)",
-        pointerEvents: "none", animation: "orb-drift 16s ease-in-out infinite",
-      }} />
-      <Box sx={{
-        position: "absolute", bottom: "-80px", left: "-80px",
-        width: "380px", height: "380px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 65%)",
-        pointerEvents: "none", animation: "orb-drift 20s ease-in-out infinite reverse",
-      }} />
+      <Box
+        sx={{
+          position: "absolute",
+          top: "-60px",
+          right: "-60px",
+          width: "480px",
+          height: "480px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 65%)",
+          pointerEvents: "none",
+          animation: "orb-drift 16s ease-in-out infinite",
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: "-80px",
+          left: "-80px",
+          width: "380px",
+          height: "380px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 65%)",
+          pointerEvents: "none",
+          animation: "orb-drift 20s ease-in-out infinite reverse",
+        }}
+      />
 
       {/* ── Header ── */}
-      <Box sx={{
-        display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        justifyContent: "space-between",
-        alignItems: { xs: "flex-start", md: "flex-end" },
-        gap: { xs: "16px", md: "32px" },
-        mb: { xs: "48px", md: "64px" },
-        position: "relative", zIndex: 1,
-      }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", md: "flex-end" },
+          gap: { xs: "16px", md: "32px" },
+          mb: { xs: "48px", md: "64px" },
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
         <Box>
-          <Typography sx={{
-            fontFamily: FB, fontSize: "13px", fontWeight: 700,
-            color: ACCENT, letterSpacing: "2px",
-            textTransform: "uppercase", mb: "16px",
-          }}>
+          <Typography
+            sx={{
+              fontFamily: FB,
+              fontSize: "13px",
+              fontWeight: 700,
+              color: ACCENT,
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              mb: "16px",
+            }}
+          >
             Client Reviews
           </Typography>
-          <Typography sx={{
-            fontFamily: FD, fontWeight: 800,
-            fontSize: { xs: "36px", sm: "44px", md: "52px", lg: "58px" },
-            color: TEXT, letterSpacing: "-2px", lineHeight: 1.06,
-          }}>
-            Don't take our word<br />
-            <Box component="span" sx={{ color: ORANGE }}>for it.</Box>
+          <Typography
+            sx={{
+              fontFamily: FD,
+              fontWeight: 800,
+              fontSize: { xs: "36px", sm: "44px", md: "52px", lg: "58px" },
+              color: TEXT,
+              letterSpacing: "-2px",
+              lineHeight: 1.06,
+            }}
+          >
+            Don't take our word
+            <br />
+            <Box component="span" sx={{ color: ORANGE }}>
+              for it.
+            </Box>
           </Typography>
         </Box>
-        <Typography sx={{
-          fontFamily: FB, fontSize: { xs: "16px", md: "17px" },
-          color: "#555", lineHeight: 1.75,
-          maxWidth: { xs: "100%", md: "280px" },
-        }}>
-          Real feedback from real clients who trusted us to build their digital presence.
+        <Typography
+          sx={{
+            fontFamily: FB,
+            fontSize: { xs: "16px", md: "17px" },
+            color: "#555",
+            lineHeight: 1.75,
+            maxWidth: { xs: "100%", md: "280px" },
+          }}
+        >
+          Real feedback from real clients who trusted us to build their digital
+          presence.
         </Typography>
       </Box>
 
       {/* ── Cards ── */}
-      <Box sx={{
-        position: "relative", zIndex: 1,
-        display: "grid",
-        gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" },
-        gap: { xs: "16px", md: "18px" },
-      }}>
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "repeat(2, 1fr)",
+            lg: "repeat(3, 1fr)",
+          },
+          gap: { xs: "16px", md: "18px" },
+        }}
+      >
         {REVIEWS.map((r, i) => (
           <Box
             key={i}
@@ -152,68 +197,103 @@ export default function Reviews() {
                 boxShadow: `0 20px 48px rgba(0,0,0,0.5)`,
                 "& .rv-quote": { color: r.color, opacity: 1 },
                 "& .rv-avatar": { backgroundColor: r.color },
+                "& .rv-initials": { color: "#fff" },
               },
             }}
           >
             {/* Top: stars + quote icon */}
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <Box sx={{ display: "flex", gap: "3px" }}>
                 {Array.from({ length: r.rating }).map((_, j) => (
-                  <FaStar key={j} size={14} color={j === 4 ? ORANGE : ACCENT} />
+                  <FaStar key={j} size={14} color={j === 5 ? ORANGE : ACCENT} />
                 ))}
               </Box>
               <FaQuoteLeft
                 className="rv-quote"
                 size={22}
-                style={{ color: "rgba(255,255,255,0.08)", opacity: 0.6, transition: "color 0.3s ease, opacity 0.3s ease" }}
+                style={{
+                  color: "rgba(255,255,255,0.08)",
+                  opacity: 0.6,
+                  transition: "color 0.3s ease, opacity 0.3s ease",
+                }}
               />
             </Box>
 
             {/* Review text */}
-            <Typography sx={{
-              fontFamily: FB,
-              fontSize: { xs: "14px", md: "15px" },
-              color: "#888",
-              lineHeight: 1.8,
-              flexGrow: 1,
-            }}>
+            <Typography
+              sx={{
+                fontFamily: FB,
+                fontSize: { xs: "14px", md: "15px" },
+                color: "#888",
+                lineHeight: 1.8,
+                flexGrow: 1,
+              }}
+            >
               "{r.text}"
             </Typography>
 
             {/* Divider */}
-            <Box sx={{ height: "1px", backgroundColor: "rgba(255,255,255,0.06)" }} />
+            <Box
+              sx={{ height: "1px", backgroundColor: "rgba(255,255,255,0.06)" }}
+            />
 
             {/* Reviewer */}
             <Box sx={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <Box
                 className="rv-avatar"
                 sx={{
-                  width: "42px", height: "42px", borderRadius: "12px",
+                  width: "42px",
+                  height: "42px",
+                  borderRadius: "12px",
                   backgroundColor: `${r.color}22`,
                   border: `1px solid ${r.color}33`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   flexShrink: 0,
                   transition: "background-color 0.3s ease",
                 }}
               >
-                <Typography sx={{
-                  fontFamily: FD, fontWeight: 800, fontSize: "13px",
-                  color: r.color,
-                }}>
+                <Typography
+                  className="rv-initials"
+                  sx={{
+                    fontFamily: FD,
+                    fontWeight: 800,
+                    fontSize: "13px",
+                    color: r.color,
+                    transition: "color 0.3s ease",
+                  }}
+                >
                   {r.initials}
                 </Typography>
               </Box>
               <Box>
-                <Typography sx={{
-                  fontFamily: FD, fontWeight: 700, fontSize: "15px",
-                  color: TEXT, letterSpacing: "-0.2px",
-                }}>
+                <Typography
+                  sx={{
+                    fontFamily: FD,
+                    fontWeight: 700,
+                    fontSize: "15px",
+                    color: TEXT,
+                    letterSpacing: "-0.2px",
+                  }}
+                >
                   {r.name}
                 </Typography>
-                <Typography sx={{
-                  fontFamily: FB, fontSize: "12px",
-                  color: "#555", fontWeight: 500, mt: "1px",
-                }}>
+                <Typography
+                  sx={{
+                    fontFamily: FB,
+                    fontSize: "12px",
+                    color: "#555",
+                    fontWeight: 500,
+                    mt: "1px",
+                  }}
+                >
                   {r.role}
                 </Typography>
               </Box>
