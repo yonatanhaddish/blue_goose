@@ -40,15 +40,12 @@ jobs:
         run: npm audit --json > npm-audit-full.json || true
 
       - name: Upload full audit report
-        uses: actions/upload-artifact@v4
         with:
           name: npm-audit-report
           path: npm-audit-full.json
           retention-days: 14
 
       # Only block on high/critical vulnerabilities in PRODUCTION dependencies.
-      # Dev/build-tool transitive vulnerabilities (flatted, minimatch, etc.)
-      # do not affect the deployed app and are excluded here.
       - name: Fail on high/critical production vulnerabilities
         run: npm audit --audit-level=high --omit=dev
 
@@ -72,7 +69,7 @@ jobs:
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: /language:javascript
+          category: "/language:javascript"
 
   # ── 3. Secret scanning (Gitleaks) ──────────────────────────────────────────
   secret-scan:
@@ -82,7 +79,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Important for Gitleaks to scan history
 
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
@@ -176,7 +173,7 @@ jobs:
       - codeql
       - secret-scan
       - lint-security
-    if: always()
+    if: always() # Run even if previous jobs fail
     steps:
       - name: Check all security jobs passed
         run: |
