@@ -46,7 +46,7 @@ jobs:
           path: npm-audit-full.json
           retention-days: 14
 
-      # Only block on high/critical vulnerabilities in PRODUCTION dependencies.
+      # Blocks only on high/critical vulnerabilities in PRODUCTION dependencies
       - name: Fail on high/critical production vulnerabilities
         run: npm audit --audit-level=high --omit=dev
 
