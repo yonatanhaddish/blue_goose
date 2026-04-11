@@ -25,6 +25,11 @@ export default function PageLoader() {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+
     const hide = () => {
       setFading(true);
       setTimeout(() => setVisible(false), 650);

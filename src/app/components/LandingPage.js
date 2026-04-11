@@ -151,16 +151,17 @@ export default function Landingpage() {
           justifyContent: "center",
           px: { xs: "20px", sm: "32px", md: "48px", lg: "72px" },
           py: { xs: "80px", md: "100px" },
+          pb: { xs: "100px", md: "110px" },
         }}
       >
         {/* ── Logo — decorative top right ── */}
         <Box
           sx={{
             position: "absolute",
-            top: { xs: "16px", md: "32px" },
-            right: { xs: "16px", md: "48px", lg: "72px" },
-            width: { xs: "280px", md: "460px" },
-            height: { xs: "280px", md: "460px" },
+            top: { xs: "16px", sm: "24px", md: "32px" },
+            right: { xs: "16px", sm: "-24px", md: "48px", lg: "72px" },
+            width: { xs: "280px", sm: "600px", md: "460px" },
+            height: { xs: "280px", sm: "600px", md: "460px" },
             opacity: 0.15,
             pointerEvents: "none",
             zIndex: 0,
@@ -221,28 +222,29 @@ export default function Landingpage() {
             fontSize: {
               xs: "46px",
               sm: "62px",
-              md: "78px",
+              md: "70px",
               lg: "94px",
               xl: "108px",
             },
-            lineHeight: 0.97,
+            lineHeight: { xs: 1.05, md: 1.08 },
             letterSpacing: { xs: "-2px", md: "-4px" },
             color: "#F5F3EF",
             mb: "28px",
-            maxWidth: "980px",
+            maxWidth: { xs: "100%", md: "760px", lg: "980px" },
             animation: "fade-up 0.7s ease both",
             animationDelay: "0.25s",
           }}
         >
-          Built Like Iron.{" "}
+          <Box component="span" sx={{ display: "block" }}>
+            Built Like Iron.
+          </Box>
           <Box
             component="span"
             sx={{
+              display: "block",
               color: ACCENT,
-              letterSpacing: { xs: "-2px", md: "-4px" },
               position: "relative",
-              display: "inline-block",
-              mt: "8px",
+              mt: { xs: "4px", md: "8px" },
               "&::after": {
                 content: '""',
                 position: "absolute",
@@ -250,15 +252,12 @@ export default function Landingpage() {
                 left: 0,
                 width: "100%",
                 height: { xs: "3px", md: "5px" },
-                background: `linear-gradient(90deg, ${ACCENT}, rgba(59,130,246,0.25))`,
+                background: `linear-gradient(90deg, ${ACCENT}, rgba(59,130,246,0.15))`,
                 borderRadius: "4px",
               },
             }}
           >
-            Made to{" "}
-            <Box component="span" sx={{ color: ACCENT }}>
-              Fly.
-            </Box>
+            Made to Fly.
           </Box>
         </Typography>
 
@@ -269,14 +268,15 @@ export default function Landingpage() {
             fontSize: { xs: "16px", md: "18px" },
             color: "#777",
             lineHeight: 1.8,
-            maxWidth: { xs: "100%", md: "520px" },
+            maxWidth: { xs: "100%", sm: "70%", md: "520px" },
             mb: "44px",
             animation: "fade-up 0.7s ease both",
             animationDelay: "0.35s",
           }}
         >
-          We design, build, and launch high-performance digital products for
-          businesses that want to grow faster — and look great doing it.
+          We design, build, and launch high-performance digital products
+          <Box component="br" sx={{ display: { xs: "none", md: "block" } }} />
+          for businesses that want to grow faster — and look great doing it.
         </Typography>
 
         {/* ── CTAs ── */}
@@ -421,42 +421,47 @@ export default function Landingpage() {
             </React.Fragment>
           ))}
         </Box>
-      </Box>
 
-      {/* ── Marquee ticker ── */}
-      <Box
-        sx={{
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          py: "16px",
-          overflow: "hidden",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <Box className="marquee-track">
-          {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((item, i) => (
-            <Box
-              key={i}
-              sx={{ display: "flex", alignItems: "center", flexShrink: 0 }}
-            >
-              <Typography
-                sx={{
-                  fontFamily: FB,
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  color: i % 2 === 0 ? ACCENT : ORANGE,
-                  px: "28px",
-                  letterSpacing: "2.5px",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap",
-                  transition: "color 0.2s",
-                  "&:hover": { color: ACCENT },
-                }}
+        {/* ── Marquee ticker — pinned to bottom of hero ── */}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            py: "16px",
+            overflow: "hidden",
+            zIndex: 2,
+            backgroundColor: "rgba(19,19,19,0.6)",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          <Box className="marquee-track">
+            {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((item, i) => (
+              <Box
+                key={i}
+                sx={{ display: "flex", alignItems: "center", flexShrink: 0 }}
               >
-                {item}
-              </Typography>
-            </Box>
-          ))}
+                <Typography
+                  sx={{
+                    fontFamily: FB,
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    color: i % 2 === 0 ? ACCENT : ORANGE,
+                    px: "28px",
+                    letterSpacing: "2.5px",
+                    textTransform: "uppercase",
+                    whiteSpace: "nowrap",
+                    transition: "color 0.2s",
+                    "&:hover": { color: ACCENT },
+                  }}
+                >
+                  {item}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Box>
     </Box>
