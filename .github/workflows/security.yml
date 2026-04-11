@@ -40,6 +40,7 @@ jobs:
         run: npm audit --json > npm-audit-full.json || true
 
       - name: Upload full audit report
+        uses: actions/upload-artifact@v4
         with:
           name: npm-audit-report
           path: npm-audit-full.json
@@ -79,7 +80,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Important for Gitleaks to scan history
+          fetch-depth: 0
 
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
@@ -173,7 +174,7 @@ jobs:
       - codeql
       - secret-scan
       - lint-security
-    if: always() # Run even if previous jobs fail
+    if: always()
     steps:
       - name: Check all security jobs passed
         run: |
