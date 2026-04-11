@@ -22,9 +22,15 @@ const PARTNERS = [
 ];
 
 const STATS = [
-  { target: 50,  suffix: "+",  label: "Technologies & tools",  color: ACCENT },
-  { target: 99.9, suffix: "%", label: "Average uptime SLA",    color: ORANGE, decimals: 1 },
-  { target: 3,   suffix: "×",  label: "Faster time-to-market", color: ACCENT },
+  { target: 50, suffix: "+", label: "Technologies & tools", color: ACCENT },
+  {
+    target: 99.9,
+    suffix: "%",
+    label: "Average uptime SLA",
+    color: ACCENT,
+    decimals: 1,
+  },
+  { target: 3, suffix: "×", label: "Faster time-to-market", color: ACCENT },
 ];
 
 function CountUp({ target, suffix, decimals = 0, color, duration = 1800 }) {
@@ -47,7 +53,7 @@ function CountUp({ target, suffix, decimals = 0, color, duration = 1800 }) {
           requestAnimationFrame(tick);
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.4 },
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -57,12 +63,16 @@ function CountUp({ target, suffix, decimals = 0, color, duration = 1800 }) {
     <Typography
       ref={ref}
       sx={{
-        fontFamily: FD, fontWeight: 800,
+        fontFamily: FD,
+        fontWeight: 800,
         fontSize: { xs: "32px", md: "38px" },
-        color, letterSpacing: "-1.5px", lineHeight: 1,
+        color,
+        letterSpacing: "-1.5px",
+        lineHeight: 1,
       }}
     >
-      {decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}{suffix}
+      {decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}
+      {suffix}
     </Typography>
   );
 }
@@ -230,12 +240,20 @@ export default function OurPartners() {
         >
           {STATS.map(({ target, suffix, decimals, label, color }) => (
             <Box key={label} sx={{ textAlign: "center" }}>
-              <CountUp target={target} suffix={suffix} decimals={decimals} color={color} />
+              <CountUp
+                target={target}
+                suffix={suffix}
+                decimals={decimals}
+                color={color}
+              />
               <Typography
                 sx={{
-                  fontFamily: FB, fontSize: "13px",
-                  color: "#999", fontWeight: 600,
-                  mt: "6px", letterSpacing: "0.2px",
+                  fontFamily: FB,
+                  fontSize: "13px",
+                  color: "#999",
+                  fontWeight: 600,
+                  mt: "6px",
+                  letterSpacing: "0.2px",
                 }}
               >
                 {label}

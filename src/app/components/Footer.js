@@ -145,12 +145,36 @@ export default function Footer() {
                 mb: "16px",
               }}
             >
-              <Box sx={{ position: "relative", width: "30px", height: "30px", flexShrink: 0 }}>
-                <Image src="/images/logo.png" alt="Blue Goose" fill style={{ objectFit: "contain" }} />
+              <Box
+                sx={{
+                  position: "relative",
+                  width: "42px",
+                  height: "42px",
+                  flexShrink: 0,
+                }}
+              >
+                <Image
+                  src="/images/logo.png"
+                  alt="Iron Goose"
+                  fill
+                  style={{ objectFit: "contain" }}
+                />
               </Box>
-              <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "20px", letterSpacing: "-0.4px" }}>
-                <Box component="span" sx={{ color: ACCENT }}>Blue</Box>
-                <Box component="span" sx={{ color: "#F97316" }}> Goose</Box>
+              <Typography
+                sx={{
+                  fontFamily: FD,
+                  fontWeight: 800,
+                  fontSize: "26px",
+                  letterSpacing: "-0.4px",
+                }}
+              >
+                <Box component="span" sx={{ color: ACCENT }}>
+                  Iron
+                </Box>
+                <Box component="span" sx={{ color: "#F97316" }}>
+                  {" "}
+                  Goose
+                </Box>
               </Typography>
             </Box>
             <Typography
@@ -200,7 +224,7 @@ export default function Footer() {
                 fontFamily: FB,
                 fontSize: "11px",
                 fontWeight: 700,
-                color: "#555",
+                color: ORANGE,
                 letterSpacing: "1.8px",
                 textTransform: "uppercase",
                 mb: "20px",
@@ -214,23 +238,15 @@ export default function Footer() {
                   key={link}
                   onClick={() => go(link)}
                   sx={{
-                    position: "relative",
                     fontFamily: FB,
                     fontSize: "15px",
                     color: "#777",
                     cursor: "pointer",
                     width: "fit-content",
-                    transition: "color 0.2s",
-                    "&:hover": { color: TEXT },
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: "-1px", left: 0,
-                      width: 0, height: "1px",
-                      backgroundColor: ACCENT,
-                      transition: "width 0.25s ease",
+                    transition: "color 0.2s ease",
+                    "&:hover": {
+                      color: ACCENT,
                     },
-                    "&:hover::after": { width: "100%" },
                   }}
                 >
                   {link}
@@ -246,7 +262,7 @@ export default function Footer() {
                 fontFamily: FB,
                 fontSize: "11px",
                 fontWeight: 700,
-                color: "#555",
+                color: ORANGE,
                 letterSpacing: "1.8px",
                 textTransform: "uppercase",
                 mb: "20px",
@@ -259,23 +275,15 @@ export default function Footer() {
                 <Box
                   key={s}
                   sx={{
-                    position: "relative",
                     fontFamily: FB,
                     fontSize: "15px",
                     color: "#777",
                     width: "fit-content",
                     cursor: "pointer",
-                    transition: "color 0.2s",
-                    "&:hover": { color: TEXT },
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: "-1px", left: 0,
-                      width: 0, height: "1px",
-                      backgroundColor: ACCENT,
-                      transition: "width 0.25s ease",
+                    transition: "color 0.2s ease",
+                    "&:hover": {
+                      color: ACCENT,
                     },
-                    "&:hover::after": { width: "100%" },
                   }}
                 >
                   {s}
@@ -291,7 +299,7 @@ export default function Footer() {
                 fontFamily: FB,
                 fontSize: "11px",
                 fontWeight: 700,
-                color: "#555",
+                color: ORANGE,
                 letterSpacing: "1.8px",
                 textTransform: "uppercase",
                 mb: "20px",
@@ -308,24 +316,16 @@ export default function Footer() {
                 <Box
                   key={v}
                   sx={{
-                    position: "relative",
                     fontFamily: FB,
                     fontSize: "15px",
                     color: "#777",
                     lineHeight: 1.6,
                     width: "fit-content",
                     cursor: "pointer",
-                    transition: "color 0.2s",
-                    "&:hover": { color: TEXT },
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: "-1px", left: 0,
-                      width: 0, height: "1px",
-                      backgroundColor: ACCENT,
-                      transition: "width 0.25s ease",
+                    transition: "color 0.2s ease",
+                    "&:hover": {
+                      color: ACCENT,
                     },
-                    "&:hover::after": { width: "100%" },
                   }}
                 >
                   {v}
@@ -348,7 +348,7 @@ export default function Footer() {
           }}
         >
           <Typography sx={{ fontFamily: FB, fontSize: "14px", color: "#555" }}>
-            © {year} Blue Goose Digital. All rights reserved.
+            © {year} Iron Goose Digital. All rights reserved.
           </Typography>
           <Typography sx={{ fontFamily: FB, fontSize: "14px", color: "#555" }}>
             Designed & built in Toronto 🇨🇦

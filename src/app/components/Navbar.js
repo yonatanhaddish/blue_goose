@@ -72,17 +72,17 @@ export default function Navbar() {
           }}
         >
           <Box sx={{
-            width: "34px", height: "34px", borderRadius: "9px",
+            width: "44px", height: "44px", borderRadius: "11px",
             overflow: "hidden", flexShrink: 0,
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
-            <Image src="/images/logo.png" alt="Blue Goose" width={34} height={34} style={{ objectFit: "contain" }} />
+            <Image src="/images/logo.png" alt="Iron Goose" width={44} height={44} style={{ objectFit: "contain" }} />
           </Box>
           <Typography sx={{
-            fontFamily: FD, fontWeight: 800, fontSize: "19px",
+            fontFamily: FD, fontWeight: 800, fontSize: "24px",
             letterSpacing: "-0.5px",
           }}>
-            <Box component="span" sx={{ color: ACCENT }}>Blue</Box>
+            <Box component="span" sx={{ color: ACCENT }}>Iron</Box>
             <Box component="span" sx={{ color: "#F97316" }}> Goose</Box>
           </Typography>
         </Box>
@@ -98,21 +98,15 @@ export default function Navbar() {
               key={item}
               onClick={() => go(item)}
               sx={{
-                position: "relative",
-                px: "12px", py: "7px", borderRadius: "8px",
+                px: "12px", py: "7px",
                 fontFamily: FB, fontWeight: 500, fontSize: "14.5px", color: "#666",
-                cursor: "pointer", transition: "color 0.2s",
-                "&:hover": { color: DARK },
-                "&::after": {
-                  content: '""',
-                  position: "absolute",
-                  bottom: "3px", left: "50%",
-                  width: 0, height: "1.5px",
-                  backgroundColor: ACCENT,
-                  transform: "translateX(-50%)",
-                  transition: "width 0.25s ease",
+                cursor: "pointer",
+                transition: "color 0.2s ease",
+                "&:hover": {
+                  color: ACCENT,
+                  textDecoration: "underline",
+                  textUnderlineOffset: "4px",
                 },
-                "&:hover::after": { width: "50%" },
               }}
             >
               {item}
@@ -150,13 +144,14 @@ export default function Navbar() {
             display: "flex",
             "@media (min-width: 1024px)": { display: "none" },
             color: DARK,
-            width: "38px", height: "38px", borderRadius: "10px",
-            border: "1px solid rgba(0,0,0,0.09)",
-            backgroundColor: "rgba(0,0,0,0.03)",
-            "&:hover": { backgroundColor: "rgba(0,0,0,0.07)" },
+            width: "46px", height: "46px", borderRadius: "11px",
+            border: "1.5px solid rgba(0,0,0,0.12)",
+            backgroundColor: "transparent",
+            transition: "all 0.2s ease",
+            "&:hover": { backgroundColor: DARK, color: BG, borderColor: DARK },
           }}
         >
-          <MenuIcon fontSize="small" />
+          <MenuIcon sx={{ fontSize: "24px" }} />
         </IconButton>
       </Box>
 
@@ -168,22 +163,23 @@ export default function Navbar() {
         sx={{
           "& .MuiDrawer-paper": {
             width: 300,
-            backgroundColor: BG,
-            boxShadow: "-8px 0 40px rgba(0,0,0,0.08)",
+            backgroundColor: DARK,
+            boxShadow: "-12px 0 60px rgba(0,0,0,0.3)",
             border: "none",
+            borderLeft: "1px solid rgba(255,255,255,0.06)",
           },
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "column", height: "100%", p: "24px" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", height: "100%", p: "28px" }}>
 
           {/* Drawer header */}
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: "36px" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: "48px" }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <Box sx={{ width: "30px", height: "30px", borderRadius: "8px", overflow: "hidden", flexShrink: 0 }}>
-                <Image src="/images/logo.png" alt="Blue Goose" width={30} height={30} style={{ objectFit: "contain" }} />
+              <Box sx={{ width: "38px", height: "38px", flexShrink: 0 }}>
+                <Image src="/images/logo.png" alt="Iron Goose" width={38} height={38} style={{ objectFit: "contain" }} />
               </Box>
-              <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "18px", letterSpacing: "-0.4px" }}>
-                <Box component="span" sx={{ color: ACCENT }}>Blue</Box>
+              <Typography sx={{ fontFamily: FD, fontWeight: 800, fontSize: "20px", letterSpacing: "-0.4px" }}>
+                <Box component="span" sx={{ color: ACCENT }}>Iron</Box>
                 <Box component="span" sx={{ color: "#F97316" }}> Goose</Box>
               </Typography>
             </Box>
@@ -192,32 +188,43 @@ export default function Navbar() {
               size="small"
               sx={{
                 width: "34px", height: "34px", borderRadius: "9px",
-                color: DARK, border: "1px solid rgba(0,0,0,0.09)",
-                backgroundColor: "rgba(0,0,0,0.03)",
-                "&:hover": { backgroundColor: "rgba(0,0,0,0.07)" },
+                color: "#666", border: "1px solid rgba(255,255,255,0.1)",
+                backgroundColor: "rgba(255,255,255,0.05)",
+                transition: "all 0.2s ease",
+                "&:hover": { backgroundColor: "rgba(255,255,255,0.1)", color: BG },
               }}
             >
-              <CloseIcon sx={{ fontSize: "16px" }} />
+              <CloseIcon sx={{ fontSize: "15px" }} />
             </IconButton>
           </Box>
 
           {/* Nav items */}
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "2px", flexGrow: 1 }}>
-            {NAV.slice(0, -1).map((item) => (
+          <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+            {NAV.slice(0, -1).map((item, i) => (
               <Box
                 key={item}
                 onClick={() => go(item)}
                 sx={{
-                  px: "14px", py: "13px", borderRadius: "12px",
-                  fontFamily: FB, fontWeight: 500, fontSize: "16px", color: "#555",
-                  cursor: "pointer", transition: "all 0.18s",
-                  "&:hover": {
-                    color: DARK,
-                    backgroundColor: "rgba(0,0,0,0.05)",
-                  },
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  py: "17px",
+                  borderBottom: "1px solid rgba(255,255,255,0.06)",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  "& .num": { color: "#333", fontFamily: FB, fontSize: "11px", fontWeight: 600, letterSpacing: "0.5px", transition: "color 0.2s", minWidth: "24px" },
+                  "& .label": { color: "#777", fontFamily: FD, fontSize: "20px", fontWeight: 700, letterSpacing: "-0.4px", transition: "color 0.2s", flexGrow: 1 },
+                  "& .arrow": { color: "transparent", fontSize: "16px", transition: "all 0.2s", transform: "translateX(-6px)" },
+                  "&:hover .num": { color: ACCENT },
+                  "&:hover .label": { color: BG },
+                  "&:hover .arrow": { color: ACCENT, transform: "translateX(0px)" },
                 }}
               >
-                {item}
+                <Box sx={{ display: "flex", alignItems: "baseline", gap: "14px" }}>
+                  <span className="num">0{i + 1}</span>
+                  <span className="label">{item}</span>
+                </Box>
+                <span className="arrow">→</span>
               </Box>
             ))}
           </Box>
@@ -226,15 +233,16 @@ export default function Navbar() {
           <Box
             onClick={() => go("Contact Us")}
             sx={{
-              mt: "24px", py: "14px",
-              backgroundColor: DARK, color: BG,
+              mt: "32px", py: "15px",
+              backgroundColor: ACCENT, color: "#fff",
               borderRadius: "14px", textAlign: "center",
-              fontFamily: FB, fontWeight: 600, fontSize: "16px",
-              cursor: "pointer", transition: "all 0.2s",
-              "&:hover": { backgroundColor: ACCENT, boxShadow: "0 6px 24px rgba(59,130,246,0.3)" },
+              fontFamily: FB, fontWeight: 700, fontSize: "15px",
+              cursor: "pointer", transition: "all 0.2s ease",
+              boxShadow: "0 4px 24px rgba(59,130,246,0.25)",
+              "&:hover": { backgroundColor: "#2563EB", boxShadow: "0 8px 32px rgba(59,130,246,0.4)" },
             }}
           >
-            Contact Us
+            Let's Talk
           </Box>
         </Box>
       </Drawer>

@@ -15,7 +15,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "Blue Goose Digital",
+  title: "Iron Goose Digital",
   description: "Premium digital solutions for modern businesses. Based in Toronto.",
 };
 

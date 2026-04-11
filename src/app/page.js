@@ -1,3 +1,4 @@
+import PageLoader from "./components/PageLoader";
 import Navbar from "./components/Navbar";
 import Landingpage from "./components/LandingPage";
 import AboutUs from "./components/AboutUs";
@@ -12,6 +13,7 @@ import Footer from "./components/Footer";
 export default function Home() {
   return (
     <>
+      <PageLoader />
       <Navbar />
       <Landingpage />
       <AboutUs />

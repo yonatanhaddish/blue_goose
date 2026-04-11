@@ -41,8 +41,8 @@ const PILLARS = [
 ];
 
 const STATS = [
-  { target: 80, suffix: "+", label: "Projects Delivered", color: ACCENT },
-  { target: 100, suffix: "%", label: "Client Satisfaction", color: ACCENT },
+  { target: 80, suffix: "+", label: "Projects Delivered", color: ORANGE },
+  { target: 100, suffix: "%", label: "Client Satisfaction", color: ORANGE },
   { target: null, display: "<1hr", label: "Avg. Response Time", color: ORANGE },
   { target: 2026, suffix: "", label: "Est. Toronto, ON", color: ORANGE },
 ];
@@ -185,7 +185,7 @@ export default function AboutUs() {
                 maxWidth: { xs: "100%", md: "300px" },
               }}
             >
-              Blue Goose Digital is a Toronto-based agency obsessed with one
+              Iron Goose Digital is a Toronto-based agency obsessed with one
               thing — helping businesses grow through smart, beautiful digital
               products.
             </Typography>
@@ -279,7 +279,7 @@ export default function AboutUs() {
                       lineHeight: 1.15,
                     }}
                   >
-                    Blue Goose Digital
+                    Iron Goose Digital
                   </Typography>
                   <Typography
                     sx={{

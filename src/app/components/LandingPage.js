@@ -23,7 +23,7 @@ const TICKER = [
 const STATS = [
   { target: 80, suffix: "+", label: "Projects Delivered", color: ACCENT },
   { target: 100, suffix: "%", label: "Satisfaction", color: ACCENT },
-  { target: null, display: "<1hr", label: "Response Time", color: ORANGE },
+  { target: null, display: "<1hr", label: "Response Time", color: ACCENT },
 ];
 
 function CountUp({ target, suffix, color, duration = 1600 }) {
@@ -234,13 +234,15 @@ export default function Landingpage() {
             animationDelay: "0.25s",
           }}
         >
-          Websites That Work.{" "}
+          Built Like Iron.{" "}
           <Box
             component="span"
             sx={{
               color: ACCENT,
+              letterSpacing: { xs: "-2px", md: "-4px" },
               position: "relative",
               display: "inline-block",
+              mt: "8px",
               "&::after": {
                 content: '""',
                 position: "absolute",
@@ -253,7 +255,7 @@ export default function Landingpage() {
               },
             }}
           >
-            Brands That{" "}
+            Made to{" "}
             <Box component="span" sx={{ color: ACCENT }}>
               Fly.
             </Box>
@@ -305,7 +307,7 @@ export default function Landingpage() {
               fontSize: { xs: "15px", md: "16px" },
               cursor: "pointer",
               transition: "all 0.25s",
-              boxShadow: "0 4px 28px rgba(59,130,246,0.4)",
+              boxShadow: "0 4px 28px  rgba(249,115,22,0.4)",
               "&:hover": {
                 backgroundColor: "rgba(249,115,22,0.9)",
                 transform: "translateY(-3px)",
@@ -442,7 +444,7 @@ export default function Landingpage() {
                   fontFamily: FB,
                   fontSize: "11px",
                   fontWeight: 700,
-                  color: "#444",
+                  color: i % 2 === 0 ? ACCENT : ORANGE,
                   px: "28px",
                   letterSpacing: "2.5px",
                   textTransform: "uppercase",
@@ -453,15 +455,6 @@ export default function Landingpage() {
               >
                 {item}
               </Typography>
-              <Box
-                sx={{
-                  width: "4px",
-                  height: "4px",
-                  borderRadius: "50%",
-                  backgroundColor: i % 2 === 0 ? ACCENT : ORANGE,
-                  flexShrink: 0,
-                }}
-              />
             </Box>
           ))}
         </Box>

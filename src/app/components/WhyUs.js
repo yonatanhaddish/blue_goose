@@ -86,7 +86,7 @@ export default function WhyUs() {
           letterSpacing: "2px", color: ACCENT,
           textTransform: "uppercase", mb: "16px",
         }}>
-          Why Blue Goose
+          Why Iron Goose
         </Typography>
         <Box sx={{
           display: "flex",

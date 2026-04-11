@@ -18,7 +18,7 @@ const REVIEWS = [
     initials: "SM",
     color: "#3B82F6",
     rating: 5,
-    text: "Blue Goose transformed our online presence completely. The team was responsive, creative, and delivered ahead of schedule. Our conversion rate jumped 40% in the first month alone.",
+    text: "Iron Goose transformed our online presence completely. The team was responsive, creative, and delivered ahead of schedule. Our conversion rate jumped 40% in the first month alone.",
   },
   {
     name: "James Okafor",
@@ -26,7 +26,7 @@ const REVIEWS = [
     initials: "JO",
     color: "#A855F7",
     rating: 5,
-    text: "Working with Blue Goose felt like having an in-house team that genuinely cared. They nailed our brand vision and built something we're truly proud of.",
+    text: "Working with Iron Goose felt like having an in-house team that genuinely cared. They nailed our brand vision and built something we're truly proud of.",
   },
   {
     name: "Priya Nair",
@@ -42,7 +42,7 @@ const REVIEWS = [
     initials: "DC",
     color: "#F59E0B",
     rating: 5,
-    text: "Our website used to be an afterthought. Now it's our strongest sales tool. Blue Goose understood our industry and built something that speaks directly to our clients.",
+    text: "Our website used to be an afterthought. Now it's our strongest sales tool. Iron Goose understood our industry and built something that speaks directly to our clients.",
   },
   {
     name: "Amara Williams",
@@ -50,7 +50,7 @@ const REVIEWS = [
     initials: "AW",
     color: "#EC4899",
     rating: 5,
-    text: "Fast, talented, and a pleasure to work with. We had a tight deadline and a complex vision — Blue Goose delivered both on time and beyond expectations.",
+    text: "Fast, talented, and a pleasure to work with. We had a tight deadline and a complex vision — Iron Goose delivered both on time and beyond expectations.",
   },
   {
     name: "Tom Bergström",
