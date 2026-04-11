@@ -1,0 +1,189 @@
+name: Security Vulnerability Scan
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Runs every Monday at 08:00 UTC
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  # ── 1. Dependency vulnerability audit ──────────────────────────────────────
+  dependency-audit:
+    name: Dependency Audit (npm)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate --json > npm-audit.json || true
+
+      - name: Upload npm audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: npm-audit.json
+          retention-days: 14
+
+      - name: Fail on high/critical vulnerabilities
+        run: npm audit --audit-level=high
+
+  # ── 2. CodeQL static analysis (SAST) ───────────────────────────────────────
+  codeql:
+    name: CodeQL SAST
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+          queries: security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:javascript
+
+  # ── 3. Secret scanning (Gitleaks) ──────────────────────────────────────────
+  secret-scan:
+    name: Secret Scan (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ── 4. Dependency review (PRs only) ────────────────────────────────────────
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          deny-licenses: GPL-2.0, GPL-3.0, AGPL-3.0
+
+  # ── 5. ESLint security linting ─────────────────────────────────────────────
+  lint-security:
+    name: ESLint Security Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install eslint-plugin-security
+        run: npm install --no-save eslint-plugin-security
+
+      - name: Run ESLint with security rules
+        run: |
+          npx eslint src/ \
+            --plugin security \
+            --rule 'security/detect-object-injection: warn' \
+            --rule 'security/detect-non-literal-regexp: warn' \
+            --rule 'security/detect-unsafe-regex: error' \
+            --rule 'security/detect-possible-timing-attacks: warn' \
+            --format json --output-file eslint-security.json || true
+
+      - name: Upload ESLint security report
+        uses: actions/upload-artifact@v4
+        with:
+          name: eslint-security-report
+          path: eslint-security.json
+          retention-days: 14
+
+  # ── 6. Scorecard supply-chain security ─────────────────────────────────────
+  scorecard:
+    name: OSSF Scorecard
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Run Scorecard analysis
+        uses: ossf/scorecard-action@v2.4.0
+        with:
+          results_file: scorecard-results.sarif
+          results_format: sarif
+          publish_results: true
+        env:
+          SCORECARD_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Scorecard results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: scorecard-results.sarif
+          category: scorecard
+
+  # ── 7. Summary gate ────────────────────────────────────────────────────────
+  security-gate:
+    name: Security Gate
+    runs-on: ubuntu-latest
+    needs:
+      - dependency-audit
+      - codeql
+      - secret-scan
+      - lint-security
+    if: always()
+    steps:
+      - name: Check all security jobs passed
+        run: |
+          results=("${{ needs.dependency-audit.result }}" "${{ needs.codeql.result }}" "${{ needs.secret-scan.result }}" "${{ needs.lint-security.result }}")
+          failed=false
+          for result in "${results[@]}"; do
+            if [[ "$result" == "failure" ]]; then
+              failed=true
+            fi
+          done
+          if [[ "$failed" == "true" ]]; then
+            echo "One or more security checks failed. Blocking merge."
+            exit 1
+          else
+            echo "All security checks passed."
+          fi
