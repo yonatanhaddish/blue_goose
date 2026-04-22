@@ -21,12 +21,12 @@ const TICKER = [
 ];
 
 const STATS = [
-  { target: 80,   suffix: "+",   label: "Projects Delivered" },
-  { target: 100,  suffix: "%",   label: "Client Satisfaction" },
-  { target: null, display: "<1hr", label: "Response Time" },
+  { target: 80, suffix: "+", label: "Projects Delivered", color: ACCENT },
+  { target: 100, suffix: "%", label: "Client Satisfaction", color: ORANGE },
+  { target: null, display: "<1hr", label: "Response Time", color: ACCENT },
 ];
 
-function CountUp({ target, suffix, size = "32px", duration = 1600 }) {
+function CountUp({ target, suffix, color, duration = 1600 }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const started = useRef(false);
@@ -46,19 +46,26 @@ function CountUp({ target, suffix, size = "32px", duration = 1600 }) {
           requestAnimationFrame(tick);
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 },
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [target, duration]);
 
   return (
-    <Typography ref={ref} sx={{
-      fontFamily: FD, fontWeight: 800,
-      fontSize: size, color: ACCENT,
-      letterSpacing: "-1px", lineHeight: 1,
-    }}>
-      {count}{suffix}
+    <Typography
+      ref={ref}
+      sx={{
+        fontFamily: FD,
+        fontWeight: 800,
+        fontSize: { xs: "36px", md: "44px" },
+        color,
+        letterSpacing: "-2px",
+        lineHeight: 1,
+      }}
+    >
+      {count}
+      {suffix}
     </Typography>
   );
 }
@@ -68,325 +75,383 @@ export default function Landingpage() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <Box sx={{ backgroundColor: DARK, position: "relative", overflow: "hidden" }}>
-
+    <Box
+      sx={{ backgroundColor: DARK, position: "relative", overflow: "hidden" }}
+    >
       {/* ── Grid texture ── */}
-      <Box sx={{
-        position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0,
-        backgroundImage:
-          "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px)," +
-          "linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
-        backgroundSize: "48px 48px",
-      }} />
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          zIndex: 0,
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px)," +
+            "linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+      />
 
-      {/* ── Ambient orbs ── */}
-      <Box sx={{
-        position: "absolute", top: "-200px", left: "-200px",
-        width: "800px", height: "800px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(59,130,246,0.14) 0%, transparent 60%)",
-        pointerEvents: "none", zIndex: 0,
-        animation: "orb-drift 18s ease-in-out infinite",
-      }} />
-      <Box sx={{
-        position: "absolute", bottom: "-100px", right: "-100px",
-        width: "640px", height: "640px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(249,115,22,0.1) 0%, transparent 60%)",
-        pointerEvents: "none", zIndex: 0,
-        animation: "orb-drift 14s ease-in-out infinite reverse",
-      }} />
+      {/* ── Orbs ── */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: "-240px",
+          left: "-240px",
+          width: "900px",
+          height: "900px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(59,130,246,0.13) 0%, transparent 60%)",
+          pointerEvents: "none",
+          zIndex: 0,
+          animation: "orb-drift 18s ease-in-out infinite",
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: "-160px",
+          right: "-160px",
+          width: "700px",
+          height: "700px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(249,115,22,0.09) 0%, transparent 60%)",
+          pointerEvents: "none",
+          zIndex: 0,
+          animation: "orb-drift 14s ease-in-out infinite reverse",
+        }}
+      />
 
-      {/* ── Hero ── */}
+      {/* ── Background image (top-right) ── */}
       <Box sx={{
-        position: "relative", zIndex: 1,
-        minHeight: "calc(100vh - 68px)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        px: { xs: "20px", sm: "40px", md: "60px", lg: "80px" },
-        pt: { xs: "40px", sm: "52px", md: "64px" },
-        pb: { xs: "80px", sm: "96px", md: "100px" },
-        // short-viewport (e.g. 1280×560): compress padding only
-        "@media (max-height: 680px) and (min-width: 900px)": {
-          pt: "20px",
-          pb: "64px",
-        },
+        position: "absolute",
+        top: 0, right: 0,
+        width: { xs: "220px", sm: "300px", md: "420px", lg: "500px" },
+        height: { xs: "220px", sm: "300px", md: "420px", lg: "500px" },
+        pointerEvents: "none", zIndex: 0,
+        maskImage: "radial-gradient(circle at top right, black 30%, transparent 75%)",
+        WebkitMaskImage: "radial-gradient(circle at top right, black 30%, transparent 75%)",
       }}>
-
-        {/* ── Two-column grid ── */}
-        <Box sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", lg: "1fr 320px" },
-          gap: { xs: "40px", md: "48px", lg: "72px" },
-          alignItems: "center",
-        }}>
-
-          {/* ── LEFT: copy ── */}
-          <Box sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: { xs: "center", lg: "flex-start" },
-            textAlign: { xs: "center", lg: "left" },
-          }}>
-
-            {/* Badge */}
-            <Box sx={{
-              display: "inline-flex", alignItems: "center", gap: "8px",
-              border: "1px solid rgba(249,115,22,0.25)",
-              backgroundColor: "rgba(249,115,22,0.08)",
-              borderRadius: "100px", px: "16px", py: "7px",
-              mb: "28px",
-              animation: "fade-up 0.6s ease both", animationDelay: "0.1s",
-              "@media (max-height: 680px)": { mb: "16px" },
-            }}>
-              <Box sx={{
-                width: "7px", height: "7px", borderRadius: "50%",
-                backgroundColor: ORANGE,
-                animation: "pulse-dot 2s ease-in-out infinite",
-              }} />
-              <Typography sx={{
-                fontFamily: FB, fontSize: "13px",
-                fontWeight: 600, color: ORANGE, letterSpacing: "0.3px",
-              }}>
-                Toronto-Based Digital Agency
-              </Typography>
-            </Box>
-
-            {/* Headline */}
-            <Typography sx={{
-              fontFamily: FD, fontWeight: 800,
-              fontSize: { xs: "46px", sm: "62px", md: "72px", lg: "80px", xl: "96px" },
-              lineHeight: 1.04,
-              letterSpacing: { xs: "-2px", md: "-3px", lg: "-4px" },
-              color: "#F5F3EF",
-              mb: "24px",
-              animation: "fade-up 0.7s ease both", animationDelay: "0.2s",
-              "@media (max-height: 680px)": { fontSize: "52px", mb: "14px", letterSpacing: "-2px" },
-            }}>
-              Built Like Iron.
-              <Box component="span" sx={{
-                display: "block", color: ACCENT, position: "relative",
-                mt: { xs: "2px", md: "6px" },
-                "&::after": {
-                  content: '""', position: "absolute",
-                  bottom: { xs: "-4px", md: "-8px" }, left: 0,
-                  width: "55%", height: { xs: "3px", md: "5px" },
-                  background: `linear-gradient(90deg, ${ACCENT}, transparent)`,
-                  borderRadius: "4px",
-                },
-              }}>
-                Made to Fly.
-              </Box>
-            </Typography>
-
-            {/* Subheading */}
-            <Typography sx={{
-              fontFamily: FB,
-              fontSize: { xs: "15px", sm: "16px", md: "17px" },
-              color: "#666", lineHeight: 1.8,
-              maxWidth: { xs: "520px", lg: "460px" },
-              mb: "36px",
-              animation: "fade-up 0.7s ease both", animationDelay: "0.3s",
-              "@media (max-height: 680px)": { mb: "20px", fontSize: "14px" },
-            }}>
-              We design, build, and launch high-performance digital products
-              for businesses that want to grow faster — and look great doing it.
-            </Typography>
-
-            {/* CTAs */}
-            <Box sx={{
-              display: "flex", gap: "12px", flexWrap: "wrap",
-              justifyContent: { xs: "center", lg: "flex-start" },
-              animation: "fade-up 0.7s ease both", animationDelay: "0.4s",
-            }}>
-              <Box onClick={() => go("contact")} sx={{
-                display: "inline-flex", alignItems: "center", gap: "10px",
-                px: { xs: "22px", md: "28px" }, py: { xs: "12px", md: "14px" },
-                backgroundColor: ORANGE, color: "#fff",
-                borderRadius: "12px", fontFamily: FB, fontWeight: 700,
-                fontSize: { xs: "14px", md: "15px" },
-                cursor: "pointer", transition: "all 0.25s",
-                boxShadow: "0 4px 24px rgba(249,115,22,0.3)",
-                "&:hover": {
-                  transform: "translateY(-3px)",
-                  boxShadow: "0 12px 36px rgba(249,115,22,0.45)",
-                  "& .arrow": { transform: "translateX(4px)" },
-                },
-                "& .arrow": { transition: "transform 0.2s" },
-              }}>
-                Start a Project <FaArrowRight size={12} className="arrow" />
-              </Box>
-
-              <Box onClick={() => go("our-work")} sx={{
-                display: "inline-flex", alignItems: "center",
-                px: { xs: "22px", md: "28px" }, py: { xs: "12px", md: "14px" },
-                border: "1.5px solid rgba(255,255,255,0.1)",
-                borderRadius: "12px", fontFamily: FB, fontWeight: 600,
-                fontSize: { xs: "14px", md: "15px" },
-                color: "#aaa", cursor: "pointer", transition: "all 0.25s",
-                backgroundColor: "rgba(255,255,255,0.04)",
-                backdropFilter: "blur(10px)",
-                "&:hover": {
-                  borderColor: ORANGE, color: ORANGE,
-                  backgroundColor: "rgba(249,115,22,0.06)",
-                  transform: "translateY(-2px)",
-                },
-              }}>
-                View Our Work
-              </Box>
-            </Box>
-
-            {/* ── Stats strip — mobile / tablet only ── */}
-            <Box sx={{
-              display: { xs: "flex", lg: "none" },
-              flexDirection: "row",
-              mt: "40px",
-              backgroundColor: "rgba(255,255,255,0.04)",
-              backdropFilter: "blur(16px)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: "16px",
-              overflow: "hidden",
-              width: "100%",
-              maxWidth: "480px",
-              animation: "fade-up 0.7s ease both", animationDelay: "0.5s",
-            }}>
-              {STATS.map((s, i) => (
-                <Box key={s.label} sx={{
-                  flex: 1, py: "20px", px: "8px", textAlign: "center",
-                  borderRight: i < STATS.length - 1
-                    ? "1px solid rgba(255,255,255,0.07)" : "none",
-                }}>
-                  {s.target !== null ? (
-                    <CountUp target={s.target} suffix={s.suffix} size="26px" />
-                  ) : (
-                    <Typography sx={{
-                      fontFamily: FD, fontWeight: 800, fontSize: "26px",
-                      color: ACCENT, letterSpacing: "-1px", lineHeight: 1,
-                    }}>
-                      {s.display}
-                    </Typography>
-                  )}
-                  <Typography sx={{
-                    fontFamily: FB, fontSize: "11px",
-                    color: "#555", mt: "6px", fontWeight: 600,
-                    letterSpacing: "0.3px",
-                  }}>
-                    {s.label}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-
-          </Box>
-
-          {/* ── RIGHT: stats panel — desktop only ── */}
-          <Box sx={{
-            display: { xs: "none", lg: "flex" },
-            flexDirection: "column",
-            gap: "10px",
-            animation: "fade-up 0.8s ease both", animationDelay: "0.45s",
-          }}>
-
-            {/* Logo card */}
-            <Box sx={{
-              position: "relative",
-              backgroundColor: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: "20px",
-              p: "32px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              overflow: "hidden",
-              mb: "2px",
-            }}>
-              <Box sx={{
-                position: "absolute", inset: 0,
-                background: "radial-gradient(circle at 50% 60%, rgba(59,130,246,0.1) 0%, transparent 70%)",
-                pointerEvents: "none",
-              }} />
-              {/* Traffic-light dots */}
-              <Box sx={{ position: "absolute", top: "14px", left: "16px", display: "flex", gap: "5px" }}>
-                {["rgba(255,255,255,0.15)", ORANGE, ACCENT].map((c, i) => (
-                  <Box key={i} sx={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: c }} />
-                ))}
-              </Box>
-              <Box sx={{ position: "relative", width: "100px", height: "100px" }}>
-                <Image
-                  src="/images/logo.png"
-                  alt="Iron Goose"
-                  fill
-                  sizes="100px"
-                  style={{ objectFit: "contain" }}
-                />
-              </Box>
-            </Box>
-
-            {/* Stat rows */}
-            {STATS.map((s) => (
-              <Box key={s.label} sx={{
-                backgroundColor: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                borderRadius: "16px",
-                px: "22px", py: "18px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: "12px",
-                transition: "all 0.2s ease",
-                "&:hover": {
-                  backgroundColor: "rgba(59,130,246,0.05)",
-                  borderColor: "rgba(59,130,246,0.2)",
-                },
-              }}>
-                <Typography sx={{
-                  fontFamily: FB, fontSize: "13px",
-                  color: "#555", fontWeight: 500,
-                }}>
-                  {s.label}
-                </Typography>
-                {s.target !== null ? (
-                  <CountUp target={s.target} suffix={s.suffix} size="30px" />
-                ) : (
-                  <Typography sx={{
-                    fontFamily: FD, fontWeight: 800,
-                    fontSize: "30px", color: ACCENT,
-                    letterSpacing: "-1px", lineHeight: 1,
-                  }}>
-                    {s.display}
-                  </Typography>
-                )}
-              </Box>
-            ))}
-
-          </Box>
-
-        </Box>
+        <Image
+          src="/images/landing_page.jpeg"
+          alt=""
+          fill
+          sizes="500px"
+          style={{ objectFit: "cover", opacity: 0.18 }}
+          priority
+        />
       </Box>
 
-      {/* ── Marquee ticker ── */}
-      <Box sx={{
-        position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2,
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        py: "14px", overflow: "hidden",
-        backgroundColor: "rgba(19,19,19,0.75)",
-        backdropFilter: "blur(8px)",
-      }}>
-        <Box className="marquee-track">
-          {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((item, i) => (
-            <Box key={i} sx={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+      {/* ── Watermark logo ── */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -60%)",
+          width: { xs: "320px", sm: "480px", md: "680px", lg: "820px" },
+          height: { xs: "320px", sm: "480px", md: "680px", lg: "820px" },
+          opacity: 0.035,
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <Image
+          src="/images/logo.png"
+          alt=""
+          fill
+          sizes="820px"
+          style={{ objectFit: "contain" }}
+          priority
+        />
+      </Box>
+
+      {/* ── Hero ── */}
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          minHeight: "calc(100vh - 68px)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          px: { xs: "20px", sm: "40px", md: "60px", lg: "80px" },
+          pt: { xs: "40px", sm: "52px", md: "64px" },
+          pb: { xs: "80px", sm: "96px", md: "104px" },
+          "@media (max-height: 680px) and (min-width: 900px)": {
+            pt: "20px",
+            pb: "64px",
+          },
+        }}
+      >
+        {/* Badge */}
+        <Box
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            border: "1px solid rgba(249,115,22,0.3)",
+            backgroundColor: "rgba(249,115,22,0.08)",
+            borderRadius: "100px",
+            px: "18px",
+            py: "8px",
+            mb: { xs: "24px", md: "32px" },
+            animation: "fade-up 0.6s ease both",
+            animationDelay: "0.05s",
+            "@media (max-height: 680px)": { mb: "14px" },
+          }}
+        >
+          <Box
+            sx={{
+              width: "7px",
+              height: "7px",
+              borderRadius: "50%",
+              backgroundColor: ORANGE,
+              animation: "pulse-dot 2s ease-in-out infinite",
+            }}
+          />
+          <Typography
+            sx={{
+              fontFamily: FB,
+              fontSize: "13px",
+              fontWeight: 600,
+              color: ORANGE,
+              letterSpacing: "0.4px",
+            }}
+          >
+            Toronto-Based Digital Agency
+          </Typography>
+        </Box>
+
+        {/* Headline */}
+        <Typography
+          sx={{
+            fontFamily: FD,
+            fontWeight: 800,
+            fontSize: {
+              xs: "36px",
+              sm: "52px",
+              md: "68px",
+              lg: "84px",
+              xl: "100px",
+            },
+            lineHeight: 0.95,
+            letterSpacing: { xs: "-2px", sm: "-3px", md: "-5px", lg: "-6px" },
+            color: "#F5F3EF",
+            mb: { xs: "16px", md: "20px" },
+            maxWidth: { xs: "100%", md: "900px", lg: "1100px" },
+            animation: "fade-up 0.7s ease both",
+            animationDelay: "0.15s",
+            "@media (max-height: 680px)": {
+              fontSize: "42px",
+              mb: "12px",
+              letterSpacing: "-1.5px",
+            },
+          }}
+        >
+          Built Like Iron.
+          <Box
+            component="span"
+            sx={{
+              display: "block",
+              background: `linear-gradient(135deg, ${ACCENT} 0%, #60A5FA 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              position: "relative",
+              "&::after": {
+                content: '""',
+                position: "absolute",
+                bottom: { xs: "-6px", md: "-12px" },
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: { xs: "80px", md: "120px" },
+                height: { xs: "3px", md: "4px" },
+                background: `linear-gradient(90deg, transparent, ${ACCENT}, transparent)`,
+                borderRadius: "4px",
+              },
+            }}
+          >
+            Made to Fly.
+          </Box>
+        </Typography>
+
+        {/* Subheading */}
+        <Typography
+          sx={{
+            fontFamily: FB,
+            fontSize: { xs: "15px", sm: "16px", md: "18px" },
+            color: "#555",
+            lineHeight: 1.8,
+            maxWidth: { xs: "100%", sm: "480px", md: "540px" },
+            mb: { xs: "32px", md: "44px" },
+            animation: "fade-up 0.7s ease both",
+            animationDelay: "0.25s",
+            "@media (max-height: 680px)": { mb: "20px", fontSize: "14px" },
+          }}
+        >
+          We design, build, and launch high-performance digital products for
+          businesses that want to grow faster — and look great doing it.
+        </Typography>
+
+        {/* CTAs */}
+        <Box
+          sx={{
+            display: "flex",
+            gap: "12px",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            mb: { xs: "48px", md: "64px" },
+            animation: "fade-up 0.7s ease both",
+            animationDelay: "0.35s",
+            "@media (max-height: 680px)": { mb: "28px" },
+          }}
+        >
+          <Box
+            onClick={() => go("contact")}
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              px: { xs: "24px", md: "32px" },
+              py: { xs: "13px", md: "16px" },
+              backgroundColor: ORANGE,
+              color: "#fff",
+              borderRadius: "14px",
+              fontFamily: FB,
+              fontWeight: 700,
+              fontSize: { xs: "14px", md: "16px" },
+              cursor: "pointer",
+              transition: "all 0.25s",
+              boxShadow: "0 4px 28px rgba(249,115,22,0.35)",
+              "&:hover": {
+                transform: "translateY(-3px)",
+                boxShadow: "0 16px 48px rgba(249,115,22,0.5)",
+                "& .arrow": { transform: "translateX(5px)" },
+              },
+              "& .arrow": { transition: "transform 0.2s" },
+            }}
+          >
+            Start a Project <FaArrowRight size={13} className="arrow" />
+          </Box>
+
+          <Box
+            onClick={() => go("our-work")}
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              px: { xs: "24px", md: "32px" },
+              py: { xs: "13px", md: "16px" },
+              border: "1.5px solid rgba(255,255,255,0.12)",
+              borderRadius: "14px",
+              fontFamily: FB,
+              fontWeight: 600,
+              fontSize: { xs: "14px", md: "16px" },
+              color: "#888",
+              cursor: "pointer",
+              transition: "all 0.25s",
+              backgroundColor: "rgba(255,255,255,0.04)",
+              backdropFilter: "blur(12px)",
+              "&:hover": {
+                borderColor: "rgba(255,255,255,0.3)",
+                color: "#F5F3EF",
+                backgroundColor: "rgba(255,255,255,0.08)",
+                transform: "translateY(-2px)",
+              },
+            }}
+          >
+            View Our Work
+          </Box>
+        </Box>
+
+        {/* ── Stats strip ── */}
+        <Box sx={{
+          display: "flex",
+          alignItems: "center",
+          backgroundColor: "rgba(255,255,255,0.04)",
+          backdropFilter: "blur(16px)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: "18px",
+          overflow: "hidden",
+          animation: "fade-up 0.7s ease both",
+          animationDelay: "0.45s",
+          "@media (max-height: 680px)": { display: "none" },
+        }}>
+          {STATS.map((s, i) => (
+            <Box key={s.label} sx={{
+              flex: 1,
+              px: { xs: "24px", md: "40px" },
+              py: { xs: "18px", md: "22px" },
+              textAlign: "center",
+              borderRight: i < STATS.length - 1
+                ? "1px solid rgba(255,255,255,0.07)" : "none",
+            }}>
+              {s.target !== null ? (
+                <CountUp target={s.target} suffix={s.suffix} color={s.color} />
+              ) : (
+                <Typography sx={{
+                  fontFamily: FD, fontWeight: 800,
+                  fontSize: { xs: "36px", md: "44px" },
+                  color: s.color, letterSpacing: "-2px", lineHeight: 1,
+                }}>
+                  {s.display}
+                </Typography>
+              )}
               <Typography sx={{
-                fontFamily: FB, fontSize: "11px", fontWeight: 700,
-                color: i % 2 === 0 ? ACCENT : ORANGE,
-                px: "28px", letterSpacing: "2.5px",
-                textTransform: "uppercase", whiteSpace: "nowrap",
+                fontFamily: FB, fontSize: { xs: "11px", md: "13px" },
+                color: "#555", mt: "6px", fontWeight: 600,
               }}>
-                {item}
+                {s.label}
               </Typography>
             </Box>
           ))}
         </Box>
       </Box>
 
+      {/* ── Marquee ticker ── */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 2,
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+          py: "14px",
+          overflow: "hidden",
+          backgroundColor: "rgba(19,19,19,0.8)",
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        <Box className="marquee-track">
+          {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((item, i) => (
+            <Box
+              key={i}
+              sx={{ display: "flex", alignItems: "center", flexShrink: 0 }}
+            >
+              <Typography
+                sx={{
+                  fontFamily: FB,
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  color: i % 2 === 0 ? ACCENT : ORANGE,
+                  px: "28px",
+                  letterSpacing: "2.5px",
+                  textTransform: "uppercase",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {item}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 }
