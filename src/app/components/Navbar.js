@@ -76,7 +76,7 @@ export default function Navbar() {
             overflow: "hidden", flexShrink: 0,
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
-            <Image src="/images/logo.png" alt="Iron Goose" width={44} height={44} style={{ objectFit: "contain" }} />
+            <Image src="/images/logo.png" alt="Iron Goose" width={44} height={44} style={{ objectFit: "contain" }} priority />
           </Box>
           <Typography sx={{
             fontFamily: FD, fontWeight: 800, fontSize: "24px",

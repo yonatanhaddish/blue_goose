@@ -157,6 +157,7 @@ export default function Footer() {
                   src="/images/logo.png"
                   alt="Iron Goose"
                   fill
+                  sizes="42px"
                   style={{ objectFit: "contain" }}
                 />
               </Box>

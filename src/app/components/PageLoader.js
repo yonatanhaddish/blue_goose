@@ -95,6 +95,7 @@ export default function PageLoader() {
             src="/images/logo.png"
             alt="Iron Goose"
             fill
+            sizes="120px"
             style={{ objectFit: "contain" }}
           />
         </Box>

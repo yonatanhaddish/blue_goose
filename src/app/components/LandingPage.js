@@ -171,6 +171,8 @@ export default function Landingpage() {
             src="/images/logo.png"
             alt=""
             fill
+            priority
+            sizes="(max-width: 600px) 200px, 400px"
             style={{ objectFit: "contain" }}
           />
         </Box>
