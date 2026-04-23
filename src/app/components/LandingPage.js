@@ -21,9 +21,9 @@ const TICKER = [
 ];
 
 const STATS = [
-  { target: 80, suffix: "+", label: "Projects Delivered", color: ACCENT },
-  { target: 100, suffix: "%", label: "Client Satisfaction", color: ORANGE },
-  { target: null, display: "<1hr", label: "Response Time", color: ACCENT },
+  { target: 80, suffix: " +", label: "Projects Delivered", color: ACCENT },
+  { target: 100, suffix: " %", label: "Client Satisfaction", color: ORANGE },
+  { target: null, display: "< 1hr", label: "Response Time", color: ACCENT },
 ];
 
 function CountUp({ target, suffix, color, duration = 1600 }) {
@@ -125,15 +125,21 @@ export default function Landingpage() {
       />
 
       {/* ── Background image (top-right) ── */}
-      <Box sx={{
-        position: "absolute",
-        top: 0, right: 0,
-        width: { xs: "220px", sm: "300px", md: "420px", lg: "500px" },
-        height: { xs: "220px", sm: "300px", md: "420px", lg: "500px" },
-        pointerEvents: "none", zIndex: 0,
-        maskImage: "radial-gradient(circle at top right, black 30%, transparent 75%)",
-        WebkitMaskImage: "radial-gradient(circle at top right, black 30%, transparent 75%)",
-      }}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: { xs: "220px", sm: "300px", md: "420px", lg: "500px" },
+          height: { xs: "220px", sm: "300px", md: "420px", lg: "500px" },
+          pointerEvents: "none",
+          zIndex: 0,
+          maskImage:
+            "radial-gradient(circle at top right, black 30%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(circle at top right, black 30%, transparent 75%)",
+        }}
+      >
         <Image
           src="/images/landing_page.jpeg"
           alt=""
@@ -370,42 +376,59 @@ export default function Landingpage() {
         </Box>
 
         {/* ── Stats strip ── */}
-        <Box sx={{
-          display: "flex",
-          alignItems: "center",
-          backgroundColor: "rgba(255,255,255,0.04)",
-          backdropFilter: "blur(16px)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          borderRadius: "18px",
-          overflow: "hidden",
-          animation: "fade-up 0.7s ease both",
-          animationDelay: "0.45s",
-          "@media (max-height: 680px)": { display: "none" },
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "rgba(255,255,255,0.04)",
+            backdropFilter: "blur(16px)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: "18px",
+            overflow: "hidden",
+            animation: "fade-up 0.7s ease both",
+            animationDelay: "0.45s",
+            "@media (max-height: 680px)": { display: "none" },
+          }}
+        >
           {STATS.map((s, i) => (
-            <Box key={s.label} sx={{
-              flex: 1,
-              px: { xs: "24px", md: "40px" },
-              py: { xs: "18px", md: "22px" },
-              textAlign: "center",
-              borderRight: i < STATS.length - 1
-                ? "1px solid rgba(255,255,255,0.07)" : "none",
-            }}>
+            <Box
+              key={s.label}
+              sx={{
+                flex: 1,
+                px: { xs: "24px", md: "40px" },
+                py: { xs: "18px", md: "22px" },
+                textAlign: "center",
+                borderRight:
+                  i < STATS.length - 1
+                    ? "1px solid rgba(255,255,255,0.07)"
+                    : "none",
+              }}
+            >
               {s.target !== null ? (
                 <CountUp target={s.target} suffix={s.suffix} color={s.color} />
               ) : (
-                <Typography sx={{
-                  fontFamily: FD, fontWeight: 800,
-                  fontSize: { xs: "36px", md: "44px" },
-                  color: s.color, letterSpacing: "-2px", lineHeight: 1,
-                }}>
+                <Typography
+                  sx={{
+                    fontFamily: FD,
+                    fontWeight: 800,
+                    fontSize: { xs: "36px", md: "44px" },
+                    color: s.color,
+                    letterSpacing: "-2px",
+                    lineHeight: 1,
+                  }}
+                >
                   {s.display}
                 </Typography>
               )}
-              <Typography sx={{
-                fontFamily: FB, fontSize: { xs: "11px", md: "13px" },
-                color: "#555", mt: "6px", fontWeight: 600,
-              }}>
+              <Typography
+                sx={{
+                  fontFamily: FB,
+                  fontSize: { xs: "11px", md: "13px" },
+                  color: "#555",
+                  mt: "6px",
+                  fontWeight: 600,
+                }}
+              >
                 {s.label}
               </Typography>
             </Box>

@@ -133,8 +133,7 @@ export default function OurWork() {
                   transform: "translateY(-6px)",
                   border: `1px solid ${p.color}33`,
                   boxShadow: `0 24px 56px rgba(0,0,0,0.5)`,
-                  "& .pw-icon-wrap": { backgroundColor: p.color, transform: "scale(1.08)" },
-                  "& .pw-icon": { color: "#fff" },
+                  "& .pw-icon-wrap": { backgroundColor: p.color, transform: "scale(1.08)", color: "#fff" },
                   "& .pw-title": { color: p.color },
                 },
               }}
@@ -159,9 +158,10 @@ export default function OurWork() {
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexShrink: 0,
                     transition: "all 0.3s ease",
+                    color: p.color,
                   }}
                 >
-                  <Icon size={24} color={p.color} className="pw-icon" style={{ transition: "color 0.3s ease" }} />
+                  <Icon size={24} className="pw-icon" style={{ transition: "color 0.3s ease" }} />
                 </Box>
 
                 {/* Status badge */}

@@ -22,15 +22,15 @@ const PARTNERS = [
 ];
 
 const STATS = [
-  { target: 50, suffix: "+", label: "Technologies & tools", color: ACCENT },
+  { target: 50, suffix: " +", label: "Technologies & tools", color: ACCENT },
   {
     target: 99.9,
-    suffix: "%",
+    suffix: " %",
     label: "Average uptime SLA",
     color: ACCENT,
     decimals: 1,
   },
-  { target: 3, suffix: "×", label: "Faster time-to-market", color: ACCENT },
+  { target: 3, suffix: " ×", label: "Faster time-to-market", color: ACCENT },
 ];
 
 function CountUp({ target, suffix, decimals = 0, color, duration = 1800 }) {

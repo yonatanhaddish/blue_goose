@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Box, Typography, TextField, IconButton } from "@mui/material";
-import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaArrowRight, FaLinkedinIn, FaTwitter, FaGithub } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaArrowRight, FaLinkedinIn, FaInstagram, FaTiktok } from "react-icons/fa";
 
 const ACCENT = "#3B82F6";
 const ORANGE = "#F97316";
@@ -17,7 +17,7 @@ const INFO = [
   { icon: FaPhoneAlt,      label: "Phone",    value: "+1 (555) 123-4567" },
 ];
 
-const SOCIALS = [FaLinkedinIn, FaTwitter, FaGithub];
+const SOCIALS = [FaLinkedinIn, FaInstagram, FaTiktok];
 
 const INPUT_SX = {
   mb: "16px",

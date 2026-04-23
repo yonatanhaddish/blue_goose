@@ -41,9 +41,14 @@ const PILLARS = [
 ];
 
 const STATS = [
-  { target: 80, suffix: "+", label: "Projects Delivered", color: ORANGE },
-  { target: 100, suffix: "%", label: "Client Satisfaction", color: ORANGE },
-  { target: null, display: "<1hr", label: "Avg. Response Time", color: ORANGE },
+  { target: 80, suffix: " +", label: "Projects Delivered", color: ORANGE },
+  { target: 100, suffix: " %", label: "Client Satisfaction", color: ORANGE },
+  {
+    target: null,
+    display: "< 1hr",
+    label: "Avg. Response Time",
+    color: ORANGE,
+  },
   { target: 2026, suffix: "", label: "Est. Toronto, ON", color: ORANGE },
 ];
 

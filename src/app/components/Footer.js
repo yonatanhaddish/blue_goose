@@ -5,9 +5,8 @@ import { Box, Typography, IconButton } from "@mui/material";
 import Image from "next/image";
 import {
   FaLinkedinIn,
-  FaTwitter,
-  FaGithub,
   FaInstagram,
+  FaTiktok,
   FaArrowRight,
 } from "react-icons/fa";
 
@@ -26,7 +25,7 @@ const SERVICES_LIST = [
   "SEO Optimization",
   "Technical Support",
 ];
-const SOCIALS = [FaLinkedinIn, FaTwitter, FaGithub, FaInstagram];
+const SOCIALS = [FaLinkedinIn, FaInstagram, FaTiktok];
 
 const ID_MAP = {
   Services: "services",
