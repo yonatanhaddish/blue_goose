@@ -21,9 +21,9 @@ const TICKER = [
 ];
 
 const STATS = [
-  { target: 80, suffix: " +", label: "Projects Delivered", color: ACCENT },
-  { target: 100, suffix: " %", label: "Client Satisfaction", color: ORANGE },
-  { target: null, display: "< 1hr", label: "Response Time", color: ACCENT },
+  { target: 80, suffix: "+", label: "Projects Delivered", color: ACCENT },
+  { target: 100, suffix: "%", label: "Client Satisfaction", color: ORANGE },
+  { target: null, display: "<1hr", label: "Response Time", color: ACCENT },
 ];
 
 function CountUp({ target, suffix, color, duration = 1600 }) {
