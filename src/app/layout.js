@@ -20,7 +20,7 @@ export const metadata = {
     description: "Premium digital solutions for businesses that want to stand out and scale.",
     images: [
       {
-        url: "/images/logo.png",
+        url: "/images/landing_page.jpeg",
         alt: "Iron Goose",
       },
     ],
@@ -29,7 +29,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Iron Goose",
     description: "Premium digital solutions for businesses that want to stand out and scale.",
-    images: ["/images/logo.png"],
+    images: ["/images/landing_page.jpeg"],
   },
 };
 export default function RootLayout({ children }) {
